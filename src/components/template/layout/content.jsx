@@ -3,7 +3,7 @@ import { Route, Router } from 'react-router-dom';
 import { createHashHistory } from 'history';
 
 import Dashboard from '../../../pages/dashboard';
-import Inscritos from '../../../pages/inscritos';
+import Inscricoes from '../../../pages/inscricoes';
 
 /*** ***/
 export const history = createHashHistory();
@@ -13,7 +13,7 @@ function Content(){
         <div className="content-wrapper">
             <Router history={history}>
                 <Route exact path='/' component={Dashboard} />
-                <Route path='/inscritos' component={Inscritos} />
+                <Route path='/inscricoes' component={Inscricoes} />
             </Router>
         </div>
     )

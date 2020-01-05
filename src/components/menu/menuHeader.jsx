@@ -13,8 +13,7 @@ function menuHeader(props){
                     </div>
                     <div className="col-sm-6">
                         <ol className="breadcrumb float-sm-right">
-                            {/* <li className="breadcrumb-item"><a href="#"></a></li> */}
-                            <li className="breadcrumb-item active">Inscrições{history}</li>
+                            <li className="breadcrumb-item active">{history}</li>
                         </ol>
                     </div>
                 </div>
