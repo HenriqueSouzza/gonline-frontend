@@ -1,8 +1,6 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 
-import '../components/template/dependencies';
-
 import Header from '../components/template/layout/header';
 import Sidebar from '../components/template/layout/sidebar';
 import Content from '../components/template/layout/content';
