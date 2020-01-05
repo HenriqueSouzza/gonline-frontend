@@ -10,7 +10,7 @@ function Inscricoes(props){
             <div className="content-fluid">
                 <div className="card">
                     <div className="card-header">
-                        <h3 className="card-title">Lista de inscritos nas inscrições</h3>
+                        <h3 className="card-title">Lista de inscritos</h3>
                     </div>
                     <div className="card-body">
                         <Table /> 
