@@ -7,7 +7,7 @@ function button(props){
     const { description, btnNovoLink } = props
 
     return(
-        <Link to={btnNovoLink}>
+        <Link to={btnNovoLink} className="btn">
             <button className="btn btn-success">
                 <i className={`fa fa-plus`}></i> {description}
             </button>

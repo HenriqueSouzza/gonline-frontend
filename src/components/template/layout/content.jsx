@@ -3,7 +3,7 @@ import { Route, Router } from 'react-router-dom';
 import { createHashHistory } from 'history';
 
 import Dashboard from '../../../pages/dashboard';
-import Inscricoes from '../../../pages/inscricoes';
+import Inscricoes from '../../../pages/inscricoes/router';
 
 /*** ***/
 export const history = createHashHistory();
