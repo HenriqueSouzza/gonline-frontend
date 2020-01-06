@@ -13,7 +13,7 @@ function Content(){
         <div className="content-wrapper">
             <Router history={history}>
                 <Route exact path='/' component={Dashboard} />
-                <Route path='/inscricoes' component={Inscricoes} />
+                <Route path='/inscritos' component={Inscricoes} />
             </Router>
         </div>
     )

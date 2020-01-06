@@ -9,7 +9,7 @@ function Menu(){
         <nav className="mt-2">
             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <MenuLink description={`Dashboard`} path={`/`} icon={`fas fa-tachometer-alt`}  active={``} />
-                <MenuLink description={`Incrições`} path={`/inscricoes`} icon={`fas fa-user-edit`} active={``} />
+                <MenuLink description={`Incrições`} path={`/inscritos`} icon={`fas fa-user-edit`} active={``} />
                 {/* <MenuTreeView description={`Forma de pagamento`} path={`#`} icon={`fas fa-check`} >
                     <MenuLink description={`Debito`} path={`/forma-pagamento/debito`} icon={`fas fa-check`} active={``} />
                     <MenuLink description={`Credito`} path={`/forma-pagamento/credito`} icon={`fas fa-check`} active={``}/>
