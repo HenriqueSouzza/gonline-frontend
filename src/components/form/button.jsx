@@ -7,8 +7,7 @@ function Button(props){
     return(
         <div className="input-group mb-3">
             <button type={type} className={`btn btn-success btn-block`}>
-                <i className={icon}></i>
-                {description}
+                <i className={icon}></i> {description}
             </button>
         </div>
     )

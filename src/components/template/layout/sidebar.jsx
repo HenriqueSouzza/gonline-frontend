@@ -9,7 +9,7 @@ function Sidebar() {
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             <Link to={`#`} className="brand-link">
                 <img src={imgPerfil} className="brand-image img-circle elevation-3" alt={`LogoImage`}/>
-                <span className="brand-text font-weight-light">AdminLTE 3</span>
+                <span className="brand-text font-weight-light">System</span>
             </Link>
 
             <div className="sidebar">
@@ -18,7 +18,7 @@ function Sidebar() {
                         <img src={imgPerfil} className="img-circle elevation-2" alt={`UserImage`} />
                     </div>
                     <div className="info">
-                        <Link to={`#`} className="d-block">Henrique Souza</Link>
+                        <Link to={`#`} className="d-block">Name User</Link>
                     </div>
                 </div>
                 <Menu />
