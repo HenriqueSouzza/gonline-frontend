@@ -14,7 +14,7 @@ import Button from '../../../components/form/button';
 
 import Input from '../../../components/form/input';
 
-import { salvarAtividade } from './actions';
+import { alterarAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
 
@@ -22,7 +22,7 @@ import { FORM_RULES } from '../../../helpers/validations';
 /**
  * @param {*} props 
  */
-class Novo extends Component{
+class Editar extends Component{
 
     constructor(props){
         super(props);
@@ -41,13 +41,13 @@ class Novo extends Component{
 
         return(
             <section className="content">
-                <MenuHeader title={`Nova atividade`} history={this.props.location.pathname} />
+                <MenuHeader title={`Editar atividade`} history={this.props.location.pathname} />
                 <div className="content-fluid">
                     <div className="card">
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
-                                render={({handleSubmit, submitting, pristine}) => (
+                                render={({ handleSubmit }) => (
                                     <form onSubmit={handleSubmit}>
                                         <div className="row">
                                             <div className="col-md-4">
@@ -115,9 +115,9 @@ class Novo extends Component{
                                                 <Field
                                                     component={Button}
                                                     type={`submit`}
-                                                    icon={`fa fa-save`} 
+                                                    icon={`fa fa-edit`} 
                                                     color={`btn-success`}
-                                                    description={`Salvar`}
+                                                    description={`Alterar`}
                                                     />
                                             </div>
                                             <div className="col-md-2">
@@ -148,7 +148,7 @@ const mapStateToProps = state => ({ atividades: state.atvAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ salvarAtividade }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ alterarAtividade }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps )(Novo);
+export default connect(mapStateToProps, mapDispatchToProps )(Editar);

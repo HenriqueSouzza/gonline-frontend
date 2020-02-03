@@ -13,7 +13,7 @@ import AtividadesAtivasVisualizar from  './atividades-ativas/visualizar';
 //Link Atividades
 import Atividades from './atividades/atividades';
 import AtividadesNovo from './atividades/novo';
-import AtividadesEditar from './atividades/novo';
+import AtividadesEditar from './atividades/editar';
 
 //Link Grupo atividades
 import GrupoAtividades from './grupo-atividades/grupoAtividades';

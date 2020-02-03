@@ -7,13 +7,17 @@ import { reducer as toastrReducer } from 'react-redux-toastr'; //redux do compon
 import AtvAlunosReducer from './pages/atividadesComplementares/alunos/reducer';
 import AtvAtividadesAtivasReducer from './pages/atividadesComplementares/atividades-ativas/reducer';
 import AtvGrupoAtividadesReducer from './pages/atividadesComplementares/grupo-atividades/reducer';
+import AtvAtividadesReducer from './pages/atividadesComplementares/grupo-atividades/reducer';
 
 const rootReducer = combineReducers({
     dashboard: () => ({ test: 1500 }),
     toastr: toastrReducer,
+    /********************************
+    *** Atividades complementares ***/
     atvAlunos: AtvAlunosReducer,
     atvAtividadesAtivas: AtvAtividadesAtivasReducer,
-    atvGrupoAtividades: AtvGrupoAtividadesReducer
+    atvAtividades: AtvAtividadesReducer,
+    atvGrupoAtividades: AtvGrupoAtividadesReducer,
 })
 
 export default rootReducer; 

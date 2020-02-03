@@ -9,18 +9,35 @@ import { BASE_API } from '../../../config/const';
 const URL = `${BASE_API}`;
 
 /**
- * Action Creator para guardar um aluno vinculado a uma atividade
+ * Action Creator para buscar atividades existentes
  */
-export const salvarAluno = (params) => {
+export const buscarAtividade = (params) => {
+
+    const endPoint = URL;
+
+}
+/**
+ * Action Creator para salvar uma nova atividade
+ */
+export const salvarAtividade = (params) => {
+
+    const endPoint = URL;
+
+}
+/**
+ * Action Creator para alterar uma atividade
+ */
+export const alterarAtividade = (params) => {
 
     const endPoint = URL;
 
 }
 
 /**
+ * Action creator para remover uma determina atividade
  * @param {*} params 
  */
-export const removerAluno = (params) => {
+export const removerAtividade = (params) => {
 
     const endPoint = URL
     

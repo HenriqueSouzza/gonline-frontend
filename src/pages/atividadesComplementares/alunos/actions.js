@@ -11,7 +11,25 @@ const URL = `${BASE_API}`;
 /**
  * Action Creator para guardar um aluno vinculado a uma atividade
  */
+export const buscarAluno = (params) => {
+
+    const endPoint = URL;
+
+}
+
+/**
+ * Action Creator para guardar um aluno vinculado a uma atividade
+ */
 export const salvarAluno = (params) => {
+
+    const endPoint = URL;
+
+}
+
+/**
+ * Action Creator para guardar um aluno vinculado a uma atividade
+ */
+export const alterarAluno = (params) => {
 
     const endPoint = URL;
 

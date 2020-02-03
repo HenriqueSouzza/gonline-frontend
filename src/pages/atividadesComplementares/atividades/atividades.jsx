@@ -18,7 +18,7 @@ import Select from '../../../components/form/select';
 
 import MenuHeader from '../../../components/menu/menuHeader';
 
-import { removerAluno } from './actions';
+import { buscarAtividade, removerAtividade } from './actions';
 
 
 const list = [
@@ -38,7 +38,7 @@ class Atividades extends Component{
 
     render(){
 
-        const { loading } = this.props.alunos
+        const { loading } = this.props.atividades
 
         const dataSelect = [
             {id: 'grupo', name: 'Grupos de Atividades'},
@@ -125,12 +125,12 @@ class Atividades extends Component{
 /**
  * @param {*} state 
  */
-const mapStateToProps = state => ({ alunos: state.atvAlunos })
+const mapStateToProps = state => ({ atividades: state.atvAtividades })
 
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ removerAluno }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ buscarAtividade, removerAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Atividades);
