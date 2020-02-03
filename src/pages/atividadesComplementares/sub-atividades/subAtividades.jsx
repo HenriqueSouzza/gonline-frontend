@@ -80,7 +80,16 @@ class SubAtividades extends Component{
                                                     component={Select} 
                                                     name={`atividade`} 
                                                     data={dataSelect}
-                                                    label={`Categoria:`}
+                                                    label={`Grupo atividade:`}
+                                                    validate={FORM_RULES.required}
+                                                    />
+                                            </div>
+                                            <div className="col-md-3">
+                                                <Field 
+                                                    component={Select} 
+                                                    name={`atividade`} 
+                                                    data={dataSelect}
+                                                    label={`Atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>
@@ -103,7 +112,7 @@ class SubAtividades extends Component{
                     <div className="card">
                         <div className="card-body">
                             <Table 
-                                description={'Atividades Ativas'}
+                                description={'Lista de sub-atividades'}
                                 checkbox={false} 
                                 columns={columns} 
                                 data={list} 

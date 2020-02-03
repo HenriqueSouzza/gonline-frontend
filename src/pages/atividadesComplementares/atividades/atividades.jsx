@@ -22,9 +22,9 @@ import { buscarAtividade, removerAtividade } from './actions';
 
 
 const list = [
-    { id: 1, name: 'Conan the Barbarian', year: '1982' },
-    { id: 2, name: 'Donan the Barbarian', year: '1982' },
-    { id: 3, name: 'Eonan the Barbarian', year: '1982' }
+    { id: 1, name: 'Conan the Barbarian' },
+    { id: 2, name: 'Donan the Barbarian' },
+    { id: 3, name: 'Eonan the Barbarian' }
 ]
 
 class Atividades extends Component{
@@ -48,20 +48,15 @@ class Atividades extends Component{
 
         const columns = [
             {
-                name: 'Código',
+                name: 'Atividade',
                 selector: 'id',
                 sortable: true,
             },
             {
-                name: 'Grupo',
+                name: 'Descrição',
                 selector: 'name',
                 sortable: true,
             },
-            {
-                name: 'Descrição',
-                selector: 'year',
-                sortable: true,
-            }
         ];
 
         return(
@@ -80,7 +75,7 @@ class Atividades extends Component{
                                                     component={Select} 
                                                     name={`atividade`} 
                                                     data={dataSelect}
-                                                    label={`Categoria:`}
+                                                    label={`Atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>
