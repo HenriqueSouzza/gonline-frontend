@@ -9,13 +9,14 @@ function Box(props){
         <div className={`small-box `+ color}>
             <div className="inner">
                 <h3>{number}</h3>
-                <p>{description}</p>
+                <p className="text-light">{description}</p>
             </div>
             <div className="icon">
                 <i className={icon}></i>
             </div>
+            <br/>
             <Link to={link} className="small-box-footer">
-                More info <i className="fas fa-arrow-circle-right"></i>
+                Mais informação <i className="fas fa-arrow-circle-right"></i>
             </Link>
         </div>
     )

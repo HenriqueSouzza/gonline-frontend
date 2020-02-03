@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Input from '../components/form/input';
-import Button from '../components/form/button';
+import Input from '../../components/form/input';
 
-function Login(){
+import Button from '../../components/form/button';
+
+function Auth(){
     return(
         <div className="container-fluid">
             <div className="row justify-content-center" style={{marginTop: 130}}>
@@ -16,13 +17,13 @@ function Login(){
                         <div className="card-body login-card-body">
                             <p className="login-box-msg">Informe seu login e senha para acessar</p>
                             <form action="" method="">
-                                <Input type={`text`} placeholder={`CPF`} icon={`fas fa-user`} />
+                                {/* <Input type={`text`} placeholder={`CPF`} icon={`fas fa-user`} />
                                 <Input type={`password`} placeholder={`Senha`} icon={`fas fa-key`} />
                                 <div className="row">
                                     <div className="col-md-12">
                                         <Button type={`submit`} icon={`fas fa-sign-in`} description={`Entrar`} />
                                     </div>
-                                </div>
+                                </div> */}
                             </form>
                         </div>
                     </div>
@@ -33,4 +34,4 @@ function Login(){
 }
 
 
-export default Login;
+export default Auth;

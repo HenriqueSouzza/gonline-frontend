@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
 
-function checkbox(){
+function checkbox(props){
+
     return(
-        <Checkbox className="" />
-    )
+        <FormControlLabel
+            control={<Checkbox {...props.input} checked={props.input.value}></Checkbox>}
+            label={props.label}
+        />
+    )   
 }
 
 export default checkbox;

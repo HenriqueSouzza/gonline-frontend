@@ -1,0 +1,6 @@
+export default {
+    LOAD: 'LOAD',
+    SALVAR_ALUNO: 'SALVAR_ALUNO',
+    BUSCAR_ALUNOS: 'BUSCAR_ALUNOS',
+    REMOVER_ALUNO: 'REMOVER_ALUNO'
+}

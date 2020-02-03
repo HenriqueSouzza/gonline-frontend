@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 function button(props){
 
-    const { description, btnNovoLink } = props
+    const { description, router, color, icon } = props
 
     return(
-        <Link to={btnNovoLink} className="btn">
-            <button className="btn btn-success">
-                <i className={`fa fa-plus`}></i> {description}
+        <Link to={router} className="btn">
+            <button className={`btn ${color}`}>
+                <i className={`fa ${icon}`}></i> {description}
             </button>
         </Link>
     )

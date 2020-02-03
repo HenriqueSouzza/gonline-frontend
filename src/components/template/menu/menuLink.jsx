@@ -9,7 +9,7 @@ function menuLink(props){
     return(
         <li className="nav-item has-treeview">
             <Link to={path} className={`nav-link ` + active}>
-                <i className={`nav-icon ` + icon}></i> <p>{description}</p>
+                <i className={`nav-icon ` + icon}></i> {description}
             </Link>
         </li>
     )

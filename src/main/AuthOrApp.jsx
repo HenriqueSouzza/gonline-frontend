@@ -1,18 +1,20 @@
 import React from 'react';
 
 import '../components/template/dependencies';
+
 import App from'./App';
-import Login from'./login';
+
+import Auth from'../pages/auth/auth';
 
 function AuthOrApp(){
-
+    
     // const acessToken = localStorage.getItem('','')
     const acessToken = `a`
 
     if(acessToken){
         return(<App />)
     }else{
-        return(<Login />)
+        return(<Auth />)
     }
 }
 

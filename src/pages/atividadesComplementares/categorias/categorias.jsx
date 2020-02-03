@@ -1,7 +1,8 @@
 import React from 'react';
 
-import MenuHeader from '../../components/menu/menuHeader';
-import Table from '../../components/table/dataTable';
+import MenuHeader from '../../../components/template/menu/menuHeader';
+
+import Table from '../../../components/table/dataTable';
 
 const data = [
     { id: 1, name: 'Conan the Barbarian', year: '1982', sexo: 'm' },
@@ -32,16 +33,14 @@ const columns = [
     }
 ];
 
-
-function Inscricoes(props){
-    console.log(props)
+function Categorias(props){
     return(
         <section className="content">
-            <MenuHeader title={`Inscrições`} history={props.location.pathname} />
+            <MenuHeader title={`Categorias`} history={props.location.pathname} />
             <div className="content-fluid">
                 <div className="card">
                     <div className="card-body">
-                        <Table selectAll={false} data={data} columns={columns} btnNovoLink={props.location.pathname + `/novo`} /> 
+                        {/* <Table selectAll={false} data={data} columns={columns} btnNovoLink={props.location.pathname + `/novo`} />  */}
                     </div>
                 </div>
             </div>
@@ -49,4 +48,5 @@ function Inscricoes(props){
     )
 }
 
-export default Inscricoes;
+
+export default Categorias;

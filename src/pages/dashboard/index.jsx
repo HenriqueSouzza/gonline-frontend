@@ -1,6 +1,7 @@
 import React from 'react';
 
-import MenuHeader from '../../components/menu/menuHeader';
+import MenuHeader from '../../components/template/menu/menuHeader';
+
 import Box from '../../components/card/box';
 
 function Dashboard(props){

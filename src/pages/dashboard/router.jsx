@@ -1,6 +1,8 @@
 import React from 'react';
 
-import Index from '../dashboard';
+import { Route, Switch } from 'react-router-dom';
+
+import Index from './index';
 
 function Router(){
     return(
