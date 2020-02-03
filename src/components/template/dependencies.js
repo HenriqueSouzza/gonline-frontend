@@ -13,7 +13,6 @@ import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
 import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
 import 'admin-lte/plugins/summernote/summernote-bs4.css';
 
-
 /***********************************************************************************************/
 /********************************* DEPENDECIAS DE JAVASCRIPT ***********************************/
 /***********************************************************************************************/
