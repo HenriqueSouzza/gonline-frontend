@@ -27,7 +27,7 @@ const list = [
     { id: 3, name: 'Eonan the Barbarian', year: '1982' }
 ]
 
-class Atividades extends Component{
+class SubAtividades extends Component{
 
     /**
      * 
@@ -66,7 +66,7 @@ class Atividades extends Component{
 
         return(
             <section className="content">
-                <MenuHeader title={`Atividades`} history={this.props.location.pathname} />
+                <MenuHeader title={`Sub-atividades`} history={this.props.location.pathname} />
                 <div className="content-fluid">
                     <div className="card">
                         <div className="card-body">
@@ -133,4 +133,4 @@ const mapStateToProps = state => ({ alunos: state.atvAlunos })
 const mapDispatchToProps = dispatch => bindActionCreators({ removerAluno }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps )(Atividades);
+export default connect(mapStateToProps, mapDispatchToProps )(SubAtividades);

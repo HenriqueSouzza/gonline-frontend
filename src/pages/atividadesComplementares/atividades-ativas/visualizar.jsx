@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import MenuHeader from '../../../components/template/menu/menuHeader';
+import MenuHeader from '../../../components/menu/menuHeader';
 
 import { buscarAtividadesAtivas } from './actions';
 
@@ -123,7 +123,7 @@ class Visualizar extends Component {
  * 
  * @param {*} state 
  */
-const mapStateToProps = state => ({ atividade: state.atvAtividades })
+const mapStateToProps = state => ({ atividade: state.atvAtividadesAtivas })
 
 /**
  * @param {*} dispatch 

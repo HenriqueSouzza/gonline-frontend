@@ -22,7 +22,7 @@ import { FORM_RULES } from '../../../helpers/validations';
 /**
  * @param {*} props 
  */
-class Novo extends Component{
+class Editar extends Component{
 
     constructor(props){
         super(props);
@@ -41,7 +41,7 @@ class Novo extends Component{
 
         return(
             <section className="content">
-                <MenuHeader title={`Nova inscrição`} history={this.props.location.pathname} />
+                <MenuHeader title={`Editar grupo de atividade`} history={this.props.location.pathname} />
                 <div className="content-fluid">
                     <div className="card">
                         <div className="card-body">
@@ -52,43 +52,12 @@ class Novo extends Component{
                                         <div className="row">
                                             <div className="col-md-4">
                                                 <Field 
-                                                    component={Select} 
-                                                    name={`periodo`} 
-                                                    data={dataSelect}
-                                                    label={`Ano/Semestre:`}
-                                                    validate={FORM_RULES.required}
-                                                    />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-4">
-                                                <Field 
-                                                    component={Select} 
-                                                    name={`tipo`} 
-                                                    data={dataSelect}
-                                                    label={`Tipo:`}
-                                                    validate={FORM_RULES.required}
-                                                    />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-4">
-                                                <Field 
-                                                    component={Select} 
-                                                    name={`atividade`} 
-                                                    data={dataSelect}
-                                                    label={`Atividade:`}
-                                                    validate={FORM_RULES.required}
-                                                    />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-4">
-                                                <Field 
-                                                    component={Select} 
-                                                    name={`subatividade`} 
-                                                    data={dataSelect}
-                                                    label={`Sub-atividade:`}
+                                                    component={Input} 
+                                                    type={`text`}
+                                                    name={`grupo`} 
+                                                    placeholder={`Grupo`}
+                                                    label={`Grupo:`}
+                                                    icon={'fa fa-object-group'}
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>
@@ -98,10 +67,10 @@ class Novo extends Component{
                                                 <Field 
                                                     component={Input} 
                                                     type={`text`}
-                                                    name={`nameAluno`} 
-                                                    placeholder={`Nome completo`}
-                                                    label={`Nome do aluno:`}
-                                                    icon={'fa fa-user'}
+                                                    name={`descricao`} 
+                                                    placeholder={`Descriçao`}
+                                                    label={`Descrição:`}
+                                                    icon={'fa fa-tags'}
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>
@@ -113,7 +82,7 @@ class Novo extends Component{
                                                     type={`submit`}
                                                     icon={`fa fa-save`} 
                                                     color={`btn-success`}
-                                                    description={`Salvar`}
+                                                    description={`Alterar`}
                                                     />
                                             </div>
                                             <div className="col-md-2">
@@ -147,4 +116,4 @@ const mapStateToProps = state => ({ alunos: state.atvAlunos })
 const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps )(Novo);
+export default connect(mapStateToProps, mapDispatchToProps )(Editar);

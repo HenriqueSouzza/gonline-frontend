@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Form, Field } from 'react-final-form';
 
-import MenuHeader from '../../../components/template/menu/menuHeader';
+import MenuHeader from '../../../components/menu/menuHeader';
 
 import Button from '../../../components/form/button';
 

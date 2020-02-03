@@ -1,18 +1,32 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-//
+//Link de Alunos
 import Alunos from './alunos/alunos';
 import AlunosNovo from './alunos/novo';
 import AlunosEditar from './alunos/editar';
 
-//
-import Categorias from './categorias/categorias';
-import CategoriasNovo from './categorias/novo';
+//Link Atividades ativas
+import AtividadesAtivas from  './atividades-ativas/atividades';
+import AtividadesAtivasVisualizar from  './atividades-ativas/visualizar';
 
-//
-import Atividades from  './atividades/atividades';
-import AtividadesVisualizar from  './atividades/visualizar';
+//Link Atividades
+import Atividades from './atividades/atividades';
+import AtividadesNovo from './atividades/novo';
+import AtividadesEditar from './atividades/novo';
+
+//Link Grupo atividades
+import GrupoAtividades from './grupo-atividades/grupoAtividades';
+import GrupoAtividadesNovo from './grupo-atividades/novo';
+import GrupoAtividadesEditar from './grupo-atividades/editar';
+
+//Link Sub-atividades
+import SubAtividades from './sub-atividades/subAtividades';
+import SubAtividadesNovo from './sub-atividades/novo';
+import SubAtividadesEditar from './sub-atividades/editar';
+
+
+
 
 function Router(){
     return(
@@ -22,11 +36,20 @@ function Router(){
             <Route exact path='/atividades-complementares/alunos/novo' component={ props => <AlunosNovo {...props} />} />
             <Route exact path='/atividades-complementares/alunos/:ordem/editar' component={ props => <AlunosEditar {...props} />} />
             {/*  */}
-            <Route exact path='/atividades-complementares/categorias' component={ props => <Categorias {...props} />} />
-            <Route exact path='/atividades-complementares/categorias/novo' component={ props => <CategoriasNovo {...props} />} />
+            <Route exact path='/atividades-complementares/atividades-ativas' component={ props => <AtividadesAtivas {...props} />} />
+            <Route exact path='/atividades-complementares/atividades-ativas/:atividade/visualizar' component={ props => <AtividadesAtivasVisualizar {...props} />} />
             {/*  */}
             <Route exact path='/atividades-complementares/atividades' component={ props => <Atividades {...props} />} />
-            <Route exact path='/atividades-complementares/atividades/:atividade/visualizar' component={ props => <AtividadesVisualizar {...props} />} />
+            <Route exact path='/atividades-complementares/atividades/novo' component={ props => <AtividadesNovo {...props} />} />
+            <Route exact path='/atividades-complementares/atividades/:atividade/editar' component={ props => <AtividadesEditar {...props} />} />
+            {/*  */}
+            <Route exact path='/atividades-complementares/grupo-atividades' component={ props => <GrupoAtividades {...props} />} />
+            <Route exact path='/atividades-complementares/grupo-atividades/novo' component={ props => <GrupoAtividadesNovo {...props} />} />
+            <Route exact path='/atividades-complementares/grupo-atividades/:grupo/editar' component={ props => <GrupoAtividadesEditar {...props} />} />
+            {/*  */}
+            <Route exact path='/atividades-complementares/sub-atividades' component={ props => <SubAtividades {...props} />} />
+            <Route exact path='/atividades-complementares/sub-atividades/novo' component={ props => <SubAtividadesNovo {...props} />} />
+            <Route exact path='/atividades-complementares/sub-atividades/:atividade/editar' component={ props => <SubAtividadesEditar {...props} />} />
         </Switch>
     )
 }
