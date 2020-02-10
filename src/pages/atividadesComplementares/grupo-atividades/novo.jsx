@@ -28,6 +28,8 @@ class Novo extends Component{
 
     onSubmit = async value => {
         console.log(value)
+        this.props.salvarGrupoAtividade(value, this.props.history)
+
     }
 
     render(){

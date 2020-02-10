@@ -9,7 +9,7 @@ export const BASE_API = (
         console.log('homologation')
         // 'http://hmlapidescontos.cnec.br/api'
     :
-        console.log('desenv')
-        // 'http://localhost:8888/api'
+        // console.log('desenv')
+        'http://desenv.iesb.br/henrique.souza/sistemasAcademicos/web-service/'
 
 );

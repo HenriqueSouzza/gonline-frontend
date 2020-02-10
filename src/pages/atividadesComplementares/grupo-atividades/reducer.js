@@ -21,18 +21,6 @@ export default (state = INITIAL_STATE, action) => {
         case type.BUSCAR_GRUPO_ATIVIDADE:
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
 
-        //Caso para salvar um grupo de atividade
-        case type.SALVAR_GRUPO_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para salvar um grupo de atividade
-        case type.ALTERAR_GRUPO_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para remover um grupo de atividades
-        case type.REMOVER_GRUPO_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
         default:
             return state;   
 

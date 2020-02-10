@@ -24,18 +24,34 @@ class Editar extends Component{
 
     constructor(props){
         super(props);
+
+        if(props.grupoAtividade.list.length <= 0){
+            props.history.goBack()
+        }
     }
 
     onSubmit = async value => {
-        console.log(value)
+        
+        value.codigo = this.props.match.params.grupo
+
+        this.props.alterarGrupoAtividade(value, this.props.history)
     }
 
     render(){
 
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
+        const { list } = this.props.grupoAtividade
+
+        const initialValues = {
+            grupo: '',
+            descricao: ''
+        }
+
+        list.find(element => {
+           if(element.TIPO_ATIV_COMPL == this.props.match.params.grupo){
+                initialValues.descricao = element.DESCRICAO
+                initialValues.grupo = element.GRUPO
+           }
+        })
 
         return(
             <section className="content">
@@ -45,6 +61,7 @@ class Editar extends Component{
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
+                                initialValues={initialValues}
                                 render={({handleSubmit, submitting, pristine}) => (
                                     <form onSubmit={handleSubmit}>
                                         <div className="row">
@@ -61,7 +78,7 @@ class Editar extends Component{
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-md-4">
+                                            <div className="col-md-8">
                                                 <Field 
                                                     component={Input} 
                                                     type={`text`}
@@ -102,7 +119,6 @@ class Editar extends Component{
 }
 
 /**
- * 
  * @param {*} state 
  */
 const mapStateToProps = state => ({ grupoAtividade: state.atvGrupoAtividades })

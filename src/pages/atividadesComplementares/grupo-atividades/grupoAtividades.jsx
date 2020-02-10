@@ -10,7 +10,7 @@ import { ACTION_RULES } from '../../../helpers/authorization';
 
 import MenuHeader from '../../../components/menu/menuHeader';
 
-import { buscarGrupoAtividade } from './actions';
+import { buscarGrupoAtividade, removerGrupoAtividade } from './actions';
 
 
 const list = [
@@ -21,31 +21,35 @@ const list = [
 
 class GrupoAtividades extends Component{
 
-    /**
-     * 
-     */
-    onSubmit = async (values) => {
-        console.log(values)
+
+    componentDidMount(){
+        this.props.buscarGrupoAtividade();
+    }
+
+    onDelete = (codigo) => {
+
+        this.props.removerGrupoAtividade(codigo, this.props.history)
+        
     }
 
     render(){
 
-        const { loading } = this.props.grupoAtividade
+        const { loading, list } = this.props.grupoAtividade
 
         const columns = [
             {
                 name: 'Código',
-                selector: 'id',
+                selector: 'TIPO_ATIV_COMPL',
                 sortable: true,
             },
             {
                 name: 'Grupo',
-                selector: 'name',
+                selector: 'GRUPO',
                 sortable: true,
             },
             {
                 name: 'Descrição',
-                selector: 'year',
+                selector: 'DESCRICAO',
                 sortable: true,
             }
         ];
@@ -62,7 +66,7 @@ class GrupoAtividades extends Component{
                                 columns={columns} 
                                 data={list} 
                                 router={this.props.history}
-                                actionDelete={false}
+                                actionDelete={this.onDelete}
                                 btnAdd={true} 
                                 actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
                                 loading={loading} 
@@ -84,7 +88,7 @@ const mapStateToProps = state => ({ grupoAtividade: state.atvGrupoAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ buscarGrupoAtividade }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ buscarGrupoAtividade, removerGrupoAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(GrupoAtividades);

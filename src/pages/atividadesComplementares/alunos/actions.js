@@ -13,6 +13,7 @@ const URL = `${BASE_API}`;
  */
 export const buscarAluno = (params) => {
 
+    console.log(URL)
     const endPoint = URL;
 
 }

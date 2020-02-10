@@ -68,8 +68,6 @@ class Alunos extends Component{
 
         const { loading, list } = this.props.alunos
 
-        console.log(loading)
-        
         const columns = [
             {
                 name: 'Ordem',
