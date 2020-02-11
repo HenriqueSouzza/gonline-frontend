@@ -20,27 +20,28 @@ import Button from '../../../components/form/button';
 
 import { ACTION_RULES } from '../../../helpers/authorization';
 
-import { buscarAtividadesAtivas } from './actions';
+import { buscarAtividadesAtivas, buscarAtividadesSelect } from './actions';
 
 
 class AtividadesAtivas extends Component{
 
     onSubmit = async (values) => {
+
         console.log(values)
+
         this.props.buscarAtividadesAtivas(values)
     }
 
     componentDidMount = () => {
 
-        const $params = []
-
-        // this.props.buscarAtividadesAtivas($params)
+        this.props.buscarAtividadesAtivas()
+        this.props.buscarAtividadesSelect()
 
     }
 
     render(){
 
-        const { list, loading } = this.props.atividades
+        const { list, listSelect, loading } = this.props.atividades
 
         const columns = [
             {
@@ -76,9 +77,9 @@ class AtividadesAtivas extends Component{
         ];
 
         let dataSelect = []
-
-        if(list.length > 0){
-            list.map(response => (
+        
+        if(listSelect.length > 0){
+            listSelect.map(response => (
                 dataSelect.push({
                     id: response.ATIVIDADE,
                     name: response.DESCRICAO
@@ -186,7 +187,7 @@ const mapStateToProps = state => ({ atividades: state.atvAtividadesAtivas })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ buscarAtividadesAtivas }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ buscarAtividadesAtivas, buscarAtividadesSelect }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(AtividadesAtivas);

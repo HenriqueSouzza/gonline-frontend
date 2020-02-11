@@ -10,7 +10,7 @@ function menuTreeView(props){
         <li className="nav-item has-treeview">
             <Link to={path} className={`nav-link`}>
                 <i className={`nav-icon ` + icon}></i>
-                <p>{description} <i className="right fas fa-angle-left"></i></p>
+                <p className="text-white">{description} <i className="right fas fa-angle-left"></i></p>
             </Link>
             <ul className="nav nav-treeview">
                 {children}

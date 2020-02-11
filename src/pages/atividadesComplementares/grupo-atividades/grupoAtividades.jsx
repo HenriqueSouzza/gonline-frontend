@@ -13,12 +13,6 @@ import MenuHeader from '../../../components/menu/menuHeader';
 import { buscarGrupoAtividade, removerGrupoAtividade } from './actions';
 
 
-const list = [
-    { id: 1, name: 'Conan the Barbarian', year: '1982' },
-    { id: 2, name: 'Donan the Barbarian', year: '1982' },
-    { id: 3, name: 'Eonan the Barbarian', year: '1982' }
-]
-
 class GrupoAtividades extends Component{
 
 

@@ -18,43 +18,50 @@ import Select from '../../../components/form/select';
 
 import MenuHeader from '../../../components/menu/menuHeader';
 
-import { buscarAtividade, removerAtividade } from './actions';
+import { buscarAtividade, buscarAtividadeSelect, removerAtividade } from './actions';
 
-
-const list = [
-    { id: 1, name: 'Conan the Barbarian' },
-    { id: 2, name: 'Donan the Barbarian' },
-    { id: 3, name: 'Eonan the Barbarian' }
-]
 
 class Atividades extends Component{
+
+
+    componentDidMount(){
+
+        this.props.buscarAtividade({grupo: 'Grupo IV'});
+        this.props.buscarAtividadeSelect();
+        
+    }
 
     /**
      * 
      */
     onSubmit = async (values) => {
-        console.log(values)
+        
+        this.props.buscarAtividade(values);
+
     }
 
     render(){
 
-        const { loading } = this.props.atividades
+        const { loading, list, listSelect } = this.props.atividades
 
-        const dataSelect = [
-            {id: 'grupo', name: 'Grupos de Atividades'},
-            {id: 'atividade', name: 'Atividades'},
-            {id: 'sub_atividade', name: 'Sub-Atividades'}
-        ]
+        //Fazer uma especie de distinct em uma array de objeto para isso escolha uma chave ou propriedade para que seja feito o distinct
+        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO)))]
+
+        const dataSelect = []
+
+        arrayDistinct.map(row => {
+            dataSelect.push({id: row, name: row})
+        })
 
         const columns = [
             {
                 name: 'Atividade',
-                selector: 'id',
+                selector: 'ATIVIDADE',
                 sortable: true,
             },
             {
                 name: 'Descrição',
-                selector: 'name',
+                selector: 'DESCRICAO',
                 sortable: true,
             },
         ];
@@ -73,9 +80,9 @@ class Atividades extends Component{
                                             <div className="col-md-3">
                                                 <Field 
                                                     component={Select} 
-                                                    name={`atividade`} 
+                                                    name={`grupo`} 
                                                     data={dataSelect}
-                                                    label={`Atividade:`}
+                                                    label={`Grupo:`}
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>
@@ -98,7 +105,7 @@ class Atividades extends Component{
                     <div className="card">
                         <div className="card-body">
                             <Table 
-                                description={'Atividades Ativas'}
+                                description={`Atividades do grupo ${list.length > 0 ? list[0].GRUPO : ''}`}
                                 checkbox={false} 
                                 columns={columns} 
                                 data={list} 
@@ -125,7 +132,7 @@ const mapStateToProps = state => ({ atividades: state.atvAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ buscarAtividade, removerAtividade }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ buscarAtividade, buscarAtividadeSelect, removerAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Atividades);

@@ -26,6 +26,9 @@ class Novo extends Component{
 
     constructor(props){
         super(props);
+        if(props.atividades.list.length <= 0 || props.atividades.list.length <= 0){
+            props.history.goBack();
+        }
     }
 
     onSubmit = async value => {

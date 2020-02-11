@@ -13,18 +13,18 @@ class Visualizar extends Component {
 
     constructor(props){
         super(props)
-        if(props.atividade.list.length <= 0){
+        if(props.atividadeAtivas.list.length <= 0){
             props.history.goBack()
         }
     }
 
     render(){
 
-        const { atividade } = this.props;
+        const { list } = this.props.atividadeAtivas;
 
         let dataItem = {}
 
-        atividade.list.map(response => {
+        list.map(response => {
             if(response.ATIVIDADE == this.props.match.params.atividade){
                 dataItem = response
             }
@@ -123,7 +123,7 @@ class Visualizar extends Component {
  * 
  * @param {*} state 
  */
-const mapStateToProps = state => ({ atividade: state.atvAtividadesAtivas })
+const mapStateToProps = state => ({ atividadeAtivas: state.atvAtividadesAtivas })
 
 /**
  * @param {*} dispatch 

@@ -26,18 +26,47 @@ class Editar extends Component{
 
     constructor(props){
         super(props);
+
+        if(props.atividades.list.length <= 0 || props.atividades.listSelect.length <= 0){
+            props.history.goBack();
+        }
     }
 
     onSubmit = async value => {
-        console.log(value)
+        
+        value.atividade = this.props.match.params.atividade
+        this.props.alterarAtividade(value, this.props.history)
+
     }
 
     render(){
 
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
+        const { listSelect, list } = this.props.atividades
+
+        //Fazer uma especie de distinct em uma array de objeto para isso escolha uma chave ou propriedade para que seja feito o distinct
+        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO)))]
+
+        const grupoSelect = []
+
+        arrayDistinct.map(row => {
+            grupoSelect.push({id: row, name: row})
+        })
+
+        const valuesForm = list.find(row => (row.ATIVIDADE == this.props.match.params.atividade))
+
+        const initialValues = {
+            grupo: valuesForm ? valuesForm.GRUPO : '',
+            descricao: valuesForm ? valuesForm.DESCRICAO : '',
+            classificacao: valuesForm ? valuesForm.CLASSIFICACAO : '',
+            requisitos: valuesForm ? valuesForm.REQUISITO : '',
+            cargaHoraria: valuesForm ? valuesForm.CH : ''
+        }
+
+        const classificacaoSelect = [
+            {id: 'ENSINO', name: 'ENSINO'},
+            {id: 'EXTENSÃO', name: 'EXTENSÃO'},
+            {id: 'PESQUISA', name: 'PESQUISA'},
+        ]
 
         return(
             <section className="content">
@@ -47,6 +76,7 @@ class Editar extends Component{
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
+                                initialValues={initialValues}
                                 render={({ handleSubmit }) => (
                                     <form onSubmit={handleSubmit}>
                                         <div className="row">
@@ -54,7 +84,7 @@ class Editar extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`grupo`} 
-                                                    data={dataSelect}
+                                                    data={grupoSelect}
                                                     label={`Grupo:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -65,9 +95,9 @@ class Editar extends Component{
                                                 <Field 
                                                     component={Input} 
                                                     type={`text`}
-                                                    name={`atividade`} 
-                                                    placeholder={`Nome completo`}
-                                                    label={`Atividade:`}
+                                                    name={`descricao`} 
+                                                    placeholder={`Descricao`}
+                                                    label={`Descricao:`}
                                                     icon={'fa fa-list-alt'}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -78,7 +108,7 @@ class Editar extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`classificacao`} 
-                                                    data={dataSelect}
+                                                    data={classificacaoSelect}
                                                     label={`Classificacao:`}
                                                     validate={FORM_RULES.required}
                                                     />

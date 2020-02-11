@@ -3,6 +3,7 @@ import type from './types';
 //Estado inicial da componente
 const INITIAL_STATE = {
     list: [],
+    listSelect: [],
     loading: false
 }
 
@@ -18,20 +19,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }
 
         //Caso para buscar grupo de atividades
-        case type.BUSCAR_ATIVIDADE:
+        case type.BUSCAR_ATIVIDADES:
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
 
-        //Caso para salvar um grupo de atividade
-        case type.SALVAR_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para salvar um grupo de atividade
-        case type.ALTERAR_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para remover um grupo de atividades
-        case type.REMOVER_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
+        //Caso para buscar grupo de atividades
+        case type.BUSCAR_ATIVIDADES_SELECT:
+            return { ...state, listSelect: action.payload.data || INITIAL_STATE.listSelect, loading: false }        
 
         default:
             return state;   

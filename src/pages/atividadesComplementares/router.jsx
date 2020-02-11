@@ -26,8 +26,6 @@ import SubAtividadesNovo from './sub-atividades/novo';
 import SubAtividadesEditar from './sub-atividades/editar';
 
 
-
-
 function Router(){
     return(
         <Switch>
