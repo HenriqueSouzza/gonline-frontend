@@ -23,21 +23,17 @@ import { buscarAtividade, buscarAtividadeSelect, removerAtividade } from './acti
 
 class Atividades extends Component{
 
-
     componentDidMount(){
-
-        this.props.buscarAtividade({grupo: 'Grupo IV'});
         this.props.buscarAtividadeSelect();
-        
     }
 
-    /**
-     * 
-     */
-    onSubmit = async (values) => {
-        
-        this.props.buscarAtividade(values);
+    onDelete = (param) => {
+        const list = this.props.atividades.list.find(row => (row.ATIVIDADE = param))
+        this.props.removerAtividade({ atividade:list.ATIVIDADE, codigo: list.TIPO_ATIV_COMPL}, this.props.history)
+    }
 
+    onSubmit = async (values) => {
+        this.props.buscarAtividade(values);
     }
 
     render(){
@@ -45,12 +41,13 @@ class Atividades extends Component{
         const { loading, list, listSelect } = this.props.atividades
 
         //Fazer uma especie de distinct em uma array de objeto para isso escolha uma chave ou propriedade para que seja feito o distinct
-        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO)))]
+        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO + ' - ' + row.DESC_GRUPO)))]
 
         const dataSelect = []
 
         arrayDistinct.map(row => {
-            dataSelect.push({id: row, name: row})
+            let arr = row.split('-')
+            dataSelect.push({id: arr[0].trim(), name: row})
         })
 
         const columns = [
@@ -105,12 +102,12 @@ class Atividades extends Component{
                     <div className="card">
                         <div className="card-body">
                             <Table 
-                                description={`Atividades do grupo ${list.length > 0 ? list[0].GRUPO : ''}`}
+                                description={`${list && list.length > 0 ? 'Atividades do grupo ' +  list[0].GRUPO : 'Selecione um grupo'}`}
                                 checkbox={false} 
                                 columns={columns} 
                                 data={list} 
                                 router={this.props.history}
-                                actionDelete={false}
+                                actionDelete={this.onDelete}
                                 btnAdd={true} 
                                 actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
                                 loading={loading} 

@@ -26,21 +26,33 @@ class Novo extends Component{
 
     constructor(props){
         super(props);
-        if(props.atividades.list.length <= 0 || props.atividades.list.length <= 0){
+        if(props.atividades.listSelect.length <= 0){
             props.history.goBack();
         }
     }
 
     onSubmit = async value => {
-        console.log(value)
+        this.props.salvarAtividade(value,this.props.history)
     }
 
     render(){
 
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
+        const { listSelect } = this.props.atividades
+
+        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO + ' - ' + row.DESC_GRUPO)))]
+
+        const grupoSelect = []
+
+        arrayDistinct.map(row => {
+            let arr = row.split('-')
+            grupoSelect.push({id: arr[0].trim(), name: row})
+        })
+
+        const classificacaoSelect = [
+            {id: 'ENSINO', name: 'ENSINO'},
+            {id: 'EXTENSÃO', name: 'EXTENSÃO'},
+            {id: 'PESQUISA', name: 'PESQUISA'},
+        ]
 
         return(
             <section className="content">
@@ -57,7 +69,7 @@ class Novo extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`grupo`} 
-                                                    data={dataSelect}
+                                                    data={grupoSelect}
                                                     label={`Grupo:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -68,9 +80,9 @@ class Novo extends Component{
                                                 <Field 
                                                     component={Input} 
                                                     type={`text`}
-                                                    name={`atividade`} 
+                                                    name={`descricao`} 
                                                     placeholder={`Nome completo`}
-                                                    label={`Atividade:`}
+                                                    label={`Descricao:`}
                                                     icon={'fa fa-list-alt'}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -81,7 +93,7 @@ class Novo extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`classificacao`} 
-                                                    data={dataSelect}
+                                                    data={classificacaoSelect}
                                                     label={`Classificacao:`}
                                                     validate={FORM_RULES.required}
                                                     />

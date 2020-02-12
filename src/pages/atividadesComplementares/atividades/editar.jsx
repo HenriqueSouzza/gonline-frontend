@@ -44,12 +44,13 @@ class Editar extends Component{
         const { listSelect, list } = this.props.atividades
 
         //Fazer uma especie de distinct em uma array de objeto para isso escolha uma chave ou propriedade para que seja feito o distinct
-        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO)))]
+        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO + ' - ' + row.DESC_GRUPO)))]
 
         const grupoSelect = []
 
         arrayDistinct.map(row => {
-            grupoSelect.push({id: row, name: row})
+            let arr = row.split('-')
+            grupoSelect.push({id: arr[0].trim(), name: row})
         })
 
         const valuesForm = list.find(row => (row.ATIVIDADE == this.props.match.params.atividade))
