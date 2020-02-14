@@ -90,6 +90,21 @@ class Alunos extends Component{
         this.props.salvarAlunoLyceum(dados)
     }
 
+    //função para deletar um aluno da atividade
+    onDelete = (param) => {
+        const dados = this.props.alunos.list.find(row => row.ORDEM == param)
+        
+        const values = {
+            periodo: dados.ANO_SEMESTRE,
+            tipo: dados.TIPO_ATIV_COMPL,
+            atividade: dados.ATIVIDADE,
+            subatividade: dados.SUB_ATIVIDADE,
+            aluno: dados.ALUNO
+        }
+
+        this.props.removerAluno(values)
+    } 
+
     //Change do formulario
     handleChange = values => {
         if(values.nameAluno || values.subatividade){
@@ -328,7 +343,7 @@ class Alunos extends Component{
                                 columns={columns} //colunas da tabela
                                 data={list} 
                                 router={this.props.history}
-                                actionDelete={this.props.removerAluno}
+                                actionDelete={this.onDelete}
                                 btnExportCSV //Propriedade para adicionar o botão de csv
                                 btnAdd
                                 actions={[ACTION_RULES.can_remove, ACTION_RULES.can_edit]}

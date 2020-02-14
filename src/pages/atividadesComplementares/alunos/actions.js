@@ -166,28 +166,25 @@ export const alterarAluno = (params, router, replicar) => {
  */
 export const removerAluno = (params) => {
 
-    const endPoint = URL
+    const endPoint = URL + 'atividades_complementares/deleteAlunosInscritos';
     
-    const parametro = {
-        aluno: ''
-    }
+    const parametro = params
     
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        setTimeout(function(){ 
-            dispatch({ type: type.REMOVER_ALUNO, payload: [] })
-        }, 1000);
+        axios.post(endPoint, parametro)
+        .then(response => {
 
-        // axios.post(endPoint, parametros)
-        // .then(response => {
-        //     dispatch({ type: type.BUSCAR_ATIVIDADES, payload: response })
-        // })
-        // .catch(error => {
-        //     dispatch({type: type.LOAD, payload: false})
-        //     console.log(error)
-        // })
+            console.log(response)
+            dispatch(buscarAluno(parametro))
+
+        })
+        .catch(error => {
+            dispatch({type: type.ERROR, payload: false})
+            console.log(error)
+        })
 
     }
 
