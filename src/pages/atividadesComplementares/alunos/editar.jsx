@@ -16,7 +16,7 @@ import Checkbox from '../../../components/form/checkbox';
 
 import Input from '../../../components/form/input';
 
-import { salvarAluno } from './actions';
+import { alterarAluno } from './actions';
 
 /**
  * @param {*} props 
@@ -25,31 +25,39 @@ class Editar extends Component{
 
     constructor(props){
         super(props)
-        // if(props.alunos.list.length <= 0){
-            // props.history.goBack()
-        // }
+        if(props.alunos.list.length <= 0){
+            props.history.goBack()
+        }
     }
 
+    /**
+     * 
+     */
     onSubmit = async (values) => {
-        console.log(values)
+
+        const valuesForm = this.props.alunos.list.find(row => (row.ORDEM == this.props.match.params.ordem))
+
+        values.periodo = valuesForm.ANO_SEMESTRE
+        values.tipo = valuesForm.TIPO_ATIV_COMPL
+        values.atividade = valuesForm.ATIVIDADE
+        values.subatividade = valuesForm.SUB_ATIVIDADE
+
+        this.props.alterarAluno([values], this.props.history)
     }
 
     render(){
-        
-        const checked = '1'
+
+        const { list } = this.props.alunos 
+
+        const valuesForm = list.find(row => (row.ORDEM == this.props.match.params.ordem))
 
         //Valores que serão inseridos nos input a propriedades tem que ser os mesmos dos names definidos dos input's
         const initialValues = {
-            aluno: '201611014',
-            name: 'Ivan texeira',
-            abandono: checked == '1' ? true : false,
-            dataFim: '2020-01-20'
+            aluno: valuesForm ? valuesForm.ALUNO : '',
+            name: valuesForm ? valuesForm.NOME_COMPL : '',
+            abandono: valuesForm ?  valuesForm.ABANDONO == '1' : false,
+            dataFim: valuesForm ? valuesForm.DATA_FIM_ATIV : ''
         }
-
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
 
         return(
             <section className="content">
@@ -80,6 +88,7 @@ class Editar extends Component{
                                                 <Field 
                                                     component={Input} 
                                                     name={`name`} 
+                                                    disabled={true}
                                                     icon={`fa fa-user`}
                                                     label={`Nome do aluno:`}
                                                     validate={FORM_RULES.required}
@@ -90,10 +99,9 @@ class Editar extends Component{
                                             <div className="col-md-4">
                                                 <Field 
                                                     component={Checkbox} 
+                                                    type={`checkbox`}
                                                     name={`abandono`}
-                                                    checked={true}
                                                     label={`Abandono`}
-                                                    validate={FORM_RULES.required}
                                                     />
                                             </div>
                                         </div>
@@ -114,6 +122,7 @@ class Editar extends Component{
                                                 <Field
                                                     component={Button}
                                                     type={`submit`}
+                                                    disabled={submitting || pristine}
                                                     icon={`fa fa-edit`} 
                                                     color={`btn-success`}
                                                     description={`Alterar`}
@@ -145,7 +154,7 @@ const mapStateToProps = state => ({ alunos: state.atvAlunos })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ alterarAluno }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Editar);

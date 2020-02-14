@@ -29,7 +29,7 @@ class Atividades extends Component{
 
     onDelete = (param) => {
         const list = this.props.atividades.list.find(row => (row.ATIVIDADE = param))
-        this.props.removerAtividade({ atividade:list.ATIVIDADE, codigo: list.TIPO_ATIV_COMPL}, this.props.history)
+        this.props.removerAtividade({ atividade:list.ATIVIDADE, codigo: list.TIPO_ATIV_COMPL, grupo: list.TIPO_ATIV_COMPL})
     }
 
     onSubmit = async (values) => {

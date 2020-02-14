@@ -89,7 +89,6 @@ export const salvarAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
-            // buscarAtividade()
             router.goBack()
             
         })
@@ -126,8 +125,8 @@ export const alterarAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
-            // buscarAtividade()
             router.goBack()
+            dispatch(buscarAtividade({grupo: params.grupo}))
             
         })
         .catch(error => {
@@ -143,7 +142,7 @@ export const alterarAtividade = (params, router) => {
  * Action creator para remover uma determina atividade
  * @param {*} params 
  */
-export const removerAtividade = (params, router) => {
+export const removerAtividade = (params) => {
 
     const endPoint = URL + 'atividades-complementares/atividades/deletar'
     
@@ -158,7 +157,10 @@ export const removerAtividade = (params, router) => {
 
         axios.post(endPoint, parametro)
         .then(response => {
-            router.go()
+
+            console.log(response)
+            dispatch(buscarAtividade({grupo: params.grupo}))
+
         })
         .catch(error => {
             dispatch({type: type.LOAD, payload: false})

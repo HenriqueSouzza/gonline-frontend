@@ -6,7 +6,7 @@ function checkbox(props){
 
     return(
         <FormControlLabel
-            control={<Checkbox {...props.input} checked={props.input.value}></Checkbox>}
+            control={<Checkbox {...props.input} checked={props.input.checked}></Checkbox>}
             label={props.label}
         />
     )   

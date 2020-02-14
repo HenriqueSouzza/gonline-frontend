@@ -2,7 +2,7 @@ import React from 'react';
 
 function Select(props){
 
-    const { label } = props
+    const { label, disabled } = props
 
     const {touched ,error, data} = props.meta
 
@@ -10,7 +10,7 @@ function Select(props){
         <div className={`form-group`}>
             <label>{label}</label>
             <div className="input-group">
-                <select className={`form-control ${touched && error && "is-invalid"}`} {...props.input} >
+                <select className={`form-control ${touched && error && "is-invalid"}`} disabled={disabled} {...props.input}>
                     <option value="">Selecione</option>
                     {data.map(response => (
                         <option key={response.id} value={response.id}>{response.name}</option>

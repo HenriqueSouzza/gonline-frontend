@@ -20,7 +20,9 @@ import Input from '../../../components/form/input';
 
 import Select from '../../../components/form/select';
 
-import { removerAluno } from './actions';
+import Checkbox from '../../../components/form/checkbox';
+
+import { removerAluno, buscarDadosForm, buscarAluno, alterarAluno, salvarAlunoLyceum } from './actions';
 
 
 const data = [
@@ -36,8 +38,12 @@ class Alunos extends Component{
 
         //
         this.state = {
-            checkbox: []
+            checkbox: [],
         }
+    }
+
+    componentDidMount(){
+        this.props.buscarDadosForm({ano: ''})
     }
 
     setCheckbox = dados => {
@@ -46,60 +52,133 @@ class Alunos extends Component{
 
     //Função para replicar data de finalização da atividade para todos os alunos selecionados
     onSubmitReplicar = async (values) => {
-        console.log(values)
-    }
+        const dados = []
 
-    //Função para registrar o abandono dos alunos que foram selecionados
-    onAbandono = () => {
-        console.log(this.state.checkbox)
-    } 
+        this.state.checkbox.map(row => {
+            dados.push({
+                dataFim: values.dataFim,
+                abandono: values.abandono ? values.abandono : 0,
+                periodo: row.ANO_SEMESTRE,
+                tipo: row.TIPO_ATIV_COMPL,
+                atividade: row.ATIVIDADE,
+                subatividade: row.SUB_ATIVIDADE,
+                aluno: row.ALUNO
+            })
+        })
+
+        //parametro funcionalidade para saber se é editacao ou replicar
+        this.props.alterarAluno(dados, this.props.history, true)
+
+    }
 
     //Função para realizar a exportação dos alunos que foram selecionados para o lyceum
     onExportLyceum = () => {
-        console.log(this.state.checkbox)
+        const dados = []
+
+        this.state.checkbox.map(row => {
+            if(row.LYCEUM == 0){
+                dados.push({
+                    periodo: row.ANO_SEMESTRE,
+                    tipo: row.TIPO_ATIV_COMPL,
+                    atividade: row.ATIVIDADE,
+                    subatividade: row.SUB_ATIVIDADE,
+                    aluno: row.ALUNO
+                })
+            }
+        })
+
+        this.props.salvarAlunoLyceum(dados)
+    }
+
+    //Change do formulario
+    handleChange = values => {
+        if(values.nameAluno || values.subatividade){
+
+        }else{
+
+            if(values.atividade){
+                values.tipo = this.props.alunos.grupoSelect.grupo[0].TIPO_ATIV_COMPL
+            }
+            
+            this.props.buscarDadosForm(values)
+        }
     }
 
     //Função para buscar os dados da atividade para listar na tabela
     onSubmit = async (values) => {
-        console.log(values)
+        this.props.buscarAluno(values)
     }
 
     render(){
 
-        const { loading, list } = this.props.alunos
+        const { loading, loadingSelect, list, periodoSelect, grupoSelect, atividadeSelect, subatividadeSelect } = this.props.alunos
 
         const columns = [
             {
                 name: 'Ordem',
-                selector: 'ordem',
+                selector: 'ORDEM',
+                sortable: true,
+            },
+            {
+                name: 'Lyceum',
+                selector: 'LYCEUM',
                 sortable: true,
             },
             {
                 name: 'Aluno',
-                selector: 'aluno',
+                selector: 'ALUNO',
                 sortable: true,
             },
             {
                 name: 'Nome',
-                selector: 'name',
+                selector: 'NOME_COMPL',
                 sortable: true,
             },
             {
                 name: 'Abandono',
-                selector: 'abandono',
+                selector: 'ABANDONO',
                 sortable: true,
             },
             {
                 name: 'Finalizar atividade',
-                selector: 'dataFim',
+                selector: 'DATA_FIM_ATIV',
                 sortable: true,
             }
         ];
 
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
+        const periodo = []
+        
+        const dataSelect = []
+        
+        if(periodoSelect.periodo){
+            periodoSelect.periodo.map( row => (
+                periodo.push({id: row.ANO_SEMESTRE, name: row.ANO_SEMESTRE})
+            ))
+        }
+            
+        const grupo = []
+
+        if(grupoSelect.grupo){
+            grupoSelect.grupo.map(row => {
+                grupo.push({id: row.TIPO_ATIV_COMPL, name: row.GRUPO + ' - ' + row.DESCRICAO})
+            })
+        }
+
+        const atividade = []
+
+        if(atividadeSelect.atividade){
+            atividadeSelect.atividade.map(row => {
+                atividade.push({id: row.ATIVIDADE, name: row.ATIVIDADE + ' - ' + row.DESCRICAO})
+            })
+        }
+
+        const subatividade = []
+
+        if(subatividadeSelect.subatividade){
+            subatividadeSelect.subatividade.map(row => {
+                subatividade.push({id: row.SUB_ATIVIDADE, name: row.DESCRICAO})
+            })
+        }
 
         return(
             <section className="content">
@@ -109,23 +188,24 @@ class Alunos extends Component{
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
-                                render={({handleSubmit}) => (
-                                    <form onSubmit={handleSubmit}>
+                                render={({handleSubmit, submitting, pristine, values}) => (
+                                    <form onSubmit={handleSubmit} onChange={(e) => this.handleChange({[e.target.name]: e.target.value}, values)}>
                                         <div className="row">
                                             <div className="col-md-2">
                                                 <Field 
                                                     component={Select} 
                                                     name={`periodo`} 
-                                                    data={dataSelect}
+                                                    data={periodo}
                                                     label={`Ano/Semestre:`}
                                                     validate={FORM_RULES.required}
-                                                    />
+                                                />
                                             </div>
                                             <div className="col-md-3">
                                                 <Field 
                                                     component={Select} 
                                                     name={`tipo`} 
-                                                    data={dataSelect}
+                                                    data={grupo}
+                                                    disabled={loadingSelect}
                                                     label={`Tipo:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -134,7 +214,8 @@ class Alunos extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`atividade`} 
-                                                    data={dataSelect}
+                                                    data={atividade}
+                                                    disabled={loadingSelect}
                                                     label={`Atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -143,7 +224,8 @@ class Alunos extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`subatividade`} 
-                                                    data={dataSelect}
+                                                    data={subatividade}
+                                                    disabled={loadingSelect}
                                                     label={`Sub-atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -166,6 +248,7 @@ class Alunos extends Component{
                                                 <Field
                                                     component={Button}
                                                     type={`submit`} 
+                                                    disabled={submitting || pristine}
                                                     color={`btn-success`}
                                                     icon={`fa fa-search`} 
                                                     description={`Buscar`}
@@ -190,29 +273,34 @@ class Alunos extends Component{
                                             <div className="col-md-3">
                                                 <label>&nbsp;</label>
                                                 <div className="input-group mb-3 justify-content-center">
-                                                    <button className="btn btn-info btn-block" type="button" disabled={this.state.checkbox.length <= 0 ? true : false} onClick={() => this.onAbandono()} name="exportLyceum">
-                                                        <i className="fa fa-save"></i> Salvar abandono
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <label>&nbsp;</label>
-                                                <div className="input-group mb-3 justify-content-center">
                                                     <button className="btn btn-secondary btn-block" type="button" disabled={this.state.checkbox.length <= 0 ? true : false} onClick={() => this.onExportLyceum()} name="exportLyceum">
                                                         <i className="fa fa-upload"></i> Export para lyceum
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div className="col-md-3 offset-1">
-                                                <Field 
-                                                    component={Input} 
-                                                    name={`data`}
-                                                    type={`date`} 
-                                                    icon={`fa fa-calendar`}
-                                                    data={dataSelect}
-                                                    label={`Data`}
-                                                    validate={FORM_RULES.required}
-                                                    />
+                                            <div className="col-md-5 offset-2">
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                        <div>&nbsp;</div>
+                                                        <Field 
+                                                            component={Checkbox} 
+                                                            type={`checkbox`}
+                                                            name={`abandono`}
+                                                            label={`Abandono`}
+                                                            />
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                        <Field 
+                                                            component={Input} 
+                                                            name={`dataFim`}
+                                                            type={`date`} 
+                                                            icon={`fa fa-calendar`}
+                                                            data={dataSelect}
+                                                            label={`Data de finalização`}
+                                                            validate={FORM_RULES.required}
+                                                            />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div className="col-md-2">
                                                 <label>&nbsp;</label>
@@ -221,7 +309,7 @@ class Alunos extends Component{
                                                     type={`submit`} 
                                                     color={`btn-success`}
                                                     icon={`fa fa-save`} 
-                                                    description={`Aplicar`}
+                                                    description={`Replicar`}
                                                     disabled={this.state.checkbox.length <= 0 ? true : false}
                                                     />
                                             </div>
@@ -263,7 +351,7 @@ const mapStateToProps = state => ({ alunos: state.atvAlunos })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ removerAluno }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ removerAluno, buscarDadosForm, buscarAluno, alterarAluno, salvarAlunoLyceum }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Alunos);

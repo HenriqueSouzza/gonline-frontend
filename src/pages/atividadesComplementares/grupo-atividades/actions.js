@@ -57,8 +57,8 @@ export const salvarGrupoAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
-            buscarGrupoAtividade(parametro)
             router.goBack()
+            dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
@@ -95,8 +95,8 @@ export const alterarGrupoAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
-            buscarGrupoAtividade(parametro)
             router.goBack()
+            dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
@@ -129,7 +129,7 @@ export const removerGrupoAtividade = (params, router) => {
         .then(response => {
 
             console.log(response.data)
-            router.go()
+            dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
