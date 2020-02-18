@@ -8,6 +8,7 @@ import AtvAlunosReducer from './pages/atividadesComplementares/alunos/reducer';
 import AtvAtividadesAtivasReducer from './pages/atividadesComplementares/atividades-ativas/reducer';
 import AtvAtividadesReducer from './pages/atividadesComplementares/atividades/reducer';
 import AtvGrupoAtividadesReducer from './pages/atividadesComplementares/grupo-atividades/reducer';
+import AtvSubAtividadesReducer from './pages/atividadesComplementares/sub-atividades/reducer';
 
 const rootReducer = combineReducers({
     dashboard: () => ({ test: 1500 }),
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     atvAtividadesAtivas: AtvAtividadesAtivasReducer,
     atvAtividades: AtvAtividadesReducer,
     atvGrupoAtividades: AtvGrupoAtividadesReducer,
+    AtvSubAtividades: AtvSubAtividadesReducer,
 })
 
 export default rootReducer; 

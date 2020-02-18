@@ -30,6 +30,9 @@ class Novo extends Component{
 
     constructor(props){
         super(props);
+        if(props.subAtividades.list.length <= 0){
+            props.history.goBack()
+        }
     }
 
     onSubmit = async value => {
@@ -293,7 +296,7 @@ class Novo extends Component{
  * 
  * @param {*} state 
  */
-const mapStateToProps = state => ({ alunos: state.atvAlunos })
+const mapStateToProps = state => ({ subAtividades: state.AtvSubAtividades })
 
 
 /**

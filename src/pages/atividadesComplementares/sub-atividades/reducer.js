@@ -3,7 +3,10 @@ import type from './types';
 //Estado inicial da componente
 const INITIAL_STATE = {
     list: [],
-    loading: false
+    grupoSelect: [],
+    atividadeSelect: [],
+    loading: false,
+    loadingSelect: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,25 +16,22 @@ export default (state = INITIAL_STATE, action) => {
         case type.LOAD:
             return { ...state, loading: action.payload }
 
+        case type.LOAD_SELECT:
+                return { ...state, loadingSelect: action.payload } 
+
         //Caso retornar algum erro
         case type.ERROR:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }
+            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false, loadingSelect: false }
 
         //Caso para buscar grupo de atividades
-        case type.BUSCAR_ATIVIDADE:
+        case type.BUSCAR_SUB_ATIVIDADE:
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
 
-        //Caso para salvar um grupo de atividade
-        case type.SALVAR_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para salvar um grupo de atividade
-        case type.ALTERAR_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para remover um grupo de atividades
-        case type.REMOVER_ATIVIDADE:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
+        //
+        case type.FORM_SUB_ATIVIDADE:
+            const arrChave = Object.keys(action.payload.data)
+            const chave = arrChave[0] + 'Select'
+            return { ...state, [chave]: action.payload.data || INITIAL_STATE.listSelect, loadingSelect: false, loading: false } 
 
         default:
             return state;   

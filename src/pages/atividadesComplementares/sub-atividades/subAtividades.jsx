@@ -18,7 +18,7 @@ import Select from '../../../components/form/select';
 
 import MenuHeader from '../../../components/menu/menuHeader';
 
-import { removerAluno } from './actions';
+import { removerSubatividade, buscarDadosSubAtividadeForm, buscarSubAtividade } from './actions';
 
 
 const list = [
@@ -29,37 +29,58 @@ const list = [
 
 class SubAtividades extends Component{
 
+
+    componentDidMount(){
+        this.props.buscarDadosSubAtividadeForm()
+    }
+
+
+    handleChange = (values) => {
+        this.props.buscarDadosSubAtividadeForm(values)
+    }
+
     /**
      * 
      */
     onSubmit = async (values) => {
-        console.log(values)
+        this.props.buscarSubAtividade(values)
     }
 
     render(){
 
-        const { loading } = this.props.alunos
+        let { list, loading, grupoSelect, atividadeSelect, loadingSelect } = this.props.subAtividades
 
-        const dataSelect = [
-            {id: 'grupo', name: 'Grupos de Atividades'},
-            {id: 'atividade', name: 'Atividades'},
-            {id: 'sub_atividade', name: 'Sub-Atividades'}
-        ]
+        const grupo = []
+
+        if(grupoSelect.grupo && grupoSelect.grupo.length > 0){
+            grupoSelect.grupo.map(row => {
+                grupo.push({
+                    id: row.TIPO_ATIV_COMPL,
+                    name: row.GRUPO + ' - ' + row.DESCRICAO
+                })
+            })
+        }
+
+        const atividade = []
+
+        if(atividadeSelect.atividade && atividadeSelect.atividade.length > 0){
+            atividadeSelect.atividade.map(row => {
+                atividade.push({
+                    id: row.ATIVIDADE,
+                    name: row.ATIVIDADE + ' - ' + row.DESCRICAO
+                })
+            })
+        }
 
         const columns = [
             {
-                name: 'Código',
-                selector: 'id',
-                sortable: true,
-            },
-            {
-                name: 'Grupo',
-                selector: 'name',
+                name: 'Sub-atividade',
+                selector: 'SUB_ATIVIDADE',
                 sortable: true,
             },
             {
                 name: 'Descrição',
-                selector: 'year',
+                selector: 'DESCRICAO',
                 sortable: true,
             }
         ];
@@ -72,14 +93,15 @@ class SubAtividades extends Component{
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
-                                render={({handleSubmit}) => (
-                                    <form onSubmit={handleSubmit}>
+                                render={({handleSubmit, submitting, pristine, values}) => (
+                                    <form onSubmit={handleSubmit} onChange={(e) => this.handleChange({[e.target.name]: e.target.value}, values)}>
                                         <div className="row">
                                             <div className="col-md-3">
                                                 <Field 
                                                     component={Select} 
-                                                    name={`atividade`} 
-                                                    data={dataSelect}
+                                                    name={`grupo`} 
+                                                    data={grupo}
+                                                    disabled={loadingSelect}
                                                     label={`Grupo atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -88,7 +110,8 @@ class SubAtividades extends Component{
                                                 <Field 
                                                     component={Select} 
                                                     name={`atividade`} 
-                                                    data={dataSelect}
+                                                    data={atividade}
+                                                    disabled={loadingSelect}
                                                     label={`Atividade:`}
                                                     validate={FORM_RULES.required}
                                                     />
@@ -99,6 +122,7 @@ class SubAtividades extends Component{
                                                     component={Button}
                                                     type={`submit`} 
                                                     color={`btn-success`}
+                                                    disabled={submitting || pristine || loadingSelect}
                                                     icon={`fa fa-search`} 
                                                     description={`Buscar`}
                                                     />
@@ -134,12 +158,12 @@ class SubAtividades extends Component{
 /**
  * @param {*} state 
  */
-const mapStateToProps = state => ({ alunos: state.atvAlunos })
+const mapStateToProps = state => ({ subAtividades: state.AtvSubAtividades })
 
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ removerAluno }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ removerSubatividade, buscarDadosSubAtividadeForm, buscarSubAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(SubAtividades);

@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 class tableAction extends Component{
     
     render(){
+
+        const { data } = this.props
+
         return(
             <table className="table">
                 <thead>
@@ -15,12 +18,14 @@ class tableAction extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"/></td>
-                        <td>(1010) - direito</td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                    </tr>
+                    {data.map( (row,index) => (
+                        <tr key={index}>
+                            <td><input type="checkbox"/></td>
+                            <td>(1010) - direito</td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         )

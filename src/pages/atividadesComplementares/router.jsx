@@ -47,7 +47,7 @@ function Router(){
             {/*  */}
             <Route exact path='/atividades-complementares/sub-atividades' component={ props => <SubAtividades {...props} />} />
             <Route exact path='/atividades-complementares/sub-atividades/novo' component={ props => <SubAtividadesNovo {...props} />} />
-            <Route exact path='/atividades-complementares/sub-atividades/:atividade/editar' component={ props => <SubAtividadesEditar {...props} />} />
+            <Route exact path='/atividades-complementares/sub-atividades/:subatividade/editar' component={ props => <SubAtividadesEditar {...props} />} />
         </Switch>
     )
 }
