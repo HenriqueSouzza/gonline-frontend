@@ -84,13 +84,60 @@ export const buscarSubAtividade = (params) => {
 
 }
 
+/**
+ * Action Creator para guardar um aluno vinculado a uma atividade
+ */
+export const salvarSubAtividade = (params) => {
+
+    const endPoint = URL + 'atividades-complementares/sub-atividade/salvar';
+
+    const parametro = params
+
+    return dispatch => {
+
+        dispatch({type: type.LOAD, payload: true})
+
+        axios.post(endPoint, parametro)
+        .then(response => {
+
+            console.log(response)
+            dispatch(buscarSubAtividade(parametro))
+
+        })
+        .catch(error => {
+            dispatch({type: type.ERROR, payload: false})
+        })
+
+    }
+
+}
+
 
 /**
  * Action Creator para guardar um aluno vinculado a uma atividade
  */
-export const salvarAluno = (params) => {
+export const alterarSubAtividade = (params) => {
 
-    const endPoint = URL;
+    const endPoint = URL + 'atividades-complementares/sub-atividade/alterar';
+
+    const parametro = params
+
+    return dispatch => {
+
+        dispatch({type: type.LOAD, payload: true})
+
+        axios.post(endPoint, parametro)
+        .then(response => {
+
+            console.log(response)
+            dispatch(buscarSubAtividade(parametro))
+
+        })
+        .catch(error => {
+            dispatch({type: type.ERROR, payload: false})
+        })
+
+    }
 
 }
 

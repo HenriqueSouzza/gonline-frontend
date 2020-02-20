@@ -20,7 +20,7 @@ import Input from '../../../components/form/input';
 
 import TableAction from './tableAction';
 
-import { salvarAluno, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade } from './actions';
+import { salvarSubAtividade, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
 
@@ -492,7 +492,7 @@ const mapStateToProps = state => ({ subAtividades: state.AtvSubAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ salvarSubAtividade, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Novo);

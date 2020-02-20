@@ -18,7 +18,7 @@ import SelectMultiple from '../../../components/form/selectMultiple';
 
 import Input from '../../../components/form/input';
 
-import { salvarAluno, buscarDadosEditarSubAtividade } from './actions';
+import { alterarSubAtividade, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
 
@@ -234,7 +234,6 @@ class Editar extends Component{
                                                             placeholder={`Data inicio`}
                                                             label={`Data início:`}
                                                             icon={'fa fa-calendar'}
-                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -245,7 +244,6 @@ class Editar extends Component{
                                                             placeholder={`Data fim`}
                                                             label={`Data fim:`}
                                                             icon={'fa fa-calendar'}
-                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -270,7 +268,6 @@ class Editar extends Component{
                                                             name={`docente`} 
                                                             data={docente}
                                                             label={`Docente responsável:`}
-                                                            disabled={loadingSelect}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -293,7 +290,6 @@ class Editar extends Component{
                                                             name={`horario`} 
                                                             label={`Horário:`}
                                                             icon={'fa fa-hourglass'}
-                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -303,7 +299,6 @@ class Editar extends Component{
                                                             name={`local`} 
                                                             label={`Local:`}
                                                             icon={'fa fa-globe'}
-                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -509,7 +504,7 @@ const mapStateToProps = state => ({ subAtividades: state.AtvSubAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno, buscarDadosEditarSubAtividade }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ alterarSubAtividade, buscarDadosEditarSubAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Editar);
