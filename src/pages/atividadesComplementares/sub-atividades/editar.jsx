@@ -12,17 +12,21 @@ import Select from '../../../components/form/select';
 
 import Button from '../../../components/form/button';
 
+import Checkbox from '../../../components/form/checkbox';
+
+import SelectMultiple from '../../../components/form/selectMultiple';
+
 import Input from '../../../components/form/input';
 
-import TableAction from './tableAction';
-
-import { salvarAluno } from './actions';
+import { salvarAluno, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
 
 import arrayMutators from "final-form-arrays";
 
 import { FieldArray } from 'react-final-form-arrays';
+
+
 
 
 /**
@@ -37,22 +41,140 @@ class Editar extends Component{
         }
     }
 
+    componentDidMount(){
+        this.props.buscarDadosEditarSubAtividade()
+    }
+
+    /**
+     * 
+     */
+    cursosSelecionados = (values, fields) => {
+
+        if(values){
+            return (
+                <table className="table">
+                    <thead>
+                        <tr className="row">
+                            <td className="col-md-8">Curso</td>
+                            <td className="col-md-2">Semestre</td>
+                            <td className="col-md-1">Carga Horaria</td>
+                            <td className="col-md-1">Ações</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            values.map( (row, index) => (
+                                <tr key={index + 1} className="row">
+                                    <td className="col-md-8">
+                                        {
+                                            row.curso ?
+                                                row.curso.map( (cursos, i) => (cursos.label + (row.curso.length > (i+1) ? ', ' : '') ))
+                                            : ''
+                                        }
+                                    </td>  
+                                    <td className="col-md-2">
+                                        {
+                                            row.semestre ? 
+                                                row.semestre.map( (semestres, i) => (semestres.label  + (row.semestre.length > (i+1) ? '-' : '') ))
+                                            : ''
+                                        }
+                                    </td>  
+                                    <td className="col-md-1">
+                                        { row.cargaHoraria ? row.cargaHoraria : ''}
+                                    </td>  
+                                    <td className="col-md-1">
+                                        <button type={`button`} onClick={() => fields.remove(index)} className="btn btn-danger">
+                                            <i className="">x</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            )
+        }
+    }
+
     onSubmit = async value => {
+        const dados = this.props.subAtividades.list.find(row => (row.SUB_ATIVIDADE == this.props.match.params.subatividade))
+        value.tipo = dados.TIPO_ATIV_COMPL
+        value.atividade = dados.ATIVIDADE
+        value.cursoResp = dados.CURSO_RESP
+        value.subatividade = dados.SUB_ATIVIDADE
         console.log(value)
     }
 
     render(){
 
-        const { list } = this.props.subAtividades
+        const { list, formEditData, loadingSelect } = this.props.subAtividades
 
-        const dataSelect = [{
-            id: 1,
-            name: 'Ano'
-        }]
+        const docente = []
+
+        if(formEditData.docente){
+            formEditData['docente'].map( row => {
+                docente.push({id: row.NUM_FUNC, name: row.NOME_COMPL})
+            })  
+        } 
+
+        const cursos = [];
+
+        if(formEditData.curso){
+            formEditData['curso'].map( row => {
+                cursos.push({value: row.CURSO, label: row.CURSO + ' - ' + row.NOME})
+            })  
+        } 
+        
+        const semestre = [
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+            { value: '3', label: '3' },
+            { value: '4', label: '4' },
+            { value: '5', label: '5' },
+            { value: '6', label: '6' },
+            { value: '7', label: '7' },
+            { value: '8', label: '8' },
+            { value: '10', label: '10' },
+            { value: '11', label: '11' },
+            { value: '12', label: '12' },
+        ];
+
 
         const dados = list.find(row => (row.SUB_ATIVIDADE == this.props.match.params.subatividade))
-        
-        const keys = [{customers: []}];
+
+        const cursoAssociadosCurso = []
+        const cursoAssociadosSemestre = []
+
+        if(dados){
+
+            dados.CURSOS.map( row => {
+                cursoAssociadosCurso.push( { value: row[0], label: row[0] + ' - ' + row[1] })
+            })
+
+            const semestreTemp = dados.SEMESTRE.split('-')
+            semestreTemp.map(row => {
+                cursoAssociadosSemestre.push( {value: row, label: row })
+            })
+        }
+
+        const initialValues = {
+            descSubAtividade: dados ? dados.DESCRICAO : '',
+            dataInicio: dados ? dados.DATA_INICIO : '', 
+            dataFim: dados ? dados.DATA_FIM : '',
+            instituicao: dados ? dados.INSTITUICAO : '',
+            cursoResp: dados ? dados.CURSO_RESP : '',
+            vagas: dados ? dados.VAGAS : '',
+            horario: dados ? dados.HORARIO : '',
+            local: dados ? dados.LOCAL_ATIV : '',
+            aonlineDtIni: dados ? dados.AONLINE_DT_INI : '', 
+            aonlineDtFim: dados ? dados.AONLINE_DT_FIM : '', 
+            blackboard: dados ? dados.BLACKBOARD : '',
+            cursosAssociados: [{
+                curso: cursoAssociadosCurso,
+                semestre: cursoAssociadosSemestre,
+                cargaHoraria: dados ? dados.CH : ''
+            }]
+        }
 
         return(
             <section className="content">
@@ -62,6 +184,7 @@ class Editar extends Component{
                         <div className="card-body">
                             <Form
                                 onSubmit={this.onSubmit}
+                                initialValues={initialValues}
                                 mutators={{
                                     ...arrayMutators
                                 }}
@@ -79,29 +202,23 @@ class Editar extends Component{
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-4">
-                                                        <Field 
-                                                            component={Select} 
-                                                            name={`grupo`} 
-                                                            data={dataSelect}
-                                                            label={`Grupo atividade:`}
-                                                            validate={FORM_RULES.required}
-                                                            />
+                                                        <label>Grupo:</label>
+                                                        <div className="">
+                                                            {dados ? dados.GRUPO : ''}
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-4">
-                                                        <Field 
-                                                            component={Select} 
-                                                            name={`atividade`} 
-                                                            data={dataSelect}
-                                                            label={`Atividade:`}
-                                                            validate={FORM_RULES.required}
-                                                            />
+                                                        <label>Atividade:</label>
+                                                        <div className="">
+                                                            {dados ? dados.ATIVIDADE : ''}
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Input} 
                                                             type={`text`}
-                                                            name={`subAtividade`} 
-                                                            placeholder={`Sub Atividade`}
+                                                            name={`descSubAtividade`} 
+                                                            placeholder={`Descrição da subatividade`}
                                                             label={`Nome sub-atividade (nome fantasia):`}
                                                             icon={'fa fa-user'}
                                                             validate={FORM_RULES.required}
@@ -133,9 +250,8 @@ class Editar extends Component{
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
-                                                            component={Select} 
+                                                            component={Input} 
                                                             name={`instituicao`} 
-                                                            data={dataSelect}
                                                             label={`Instituição:`}
                                                             validate={FORM_RULES.required}
                                                             />
@@ -143,21 +259,18 @@ class Editar extends Component{
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-4">
-                                                        <Field 
-                                                            component={Select} 
-                                                            name={`subatividade`} 
-                                                            data={dataSelect}
-                                                            label={`Curso responsável:`}
-                                                            validate={FORM_RULES.required}
-                                                            />
+                                                        <label>Curso responsável:</label>
+                                                        <div className="">
+                                                            { dados ? dados.CURSO_RESP + ' - ' + dados.DESC_CURSO_RESP :'' }
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
                                                             name={`docente`} 
-                                                            data={dataSelect}
+                                                            data={docente}
                                                             label={`Docente responsável:`}
-                                                            validate={FORM_RULES.required}
+                                                            disabled={loadingSelect}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -176,7 +289,7 @@ class Editar extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Input} 
-                                                            type={`time`}
+                                                            type={`text`}
                                                             name={`horario`} 
                                                             label={`Horário:`}
                                                             icon={'fa fa-hourglass'}
@@ -200,18 +313,6 @@ class Editar extends Component{
                                                             name={`ementa`} 
                                                             label={`Ementa:`}
                                                             icon={'fa fa-upload'}
-                                                            validate={FORM_RULES.required}
-                                                            />
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <Field 
-                                                            component={Input} 
-                                                            type={`text`}
-                                                            name={`cursoAssociado`} 
-                                                            label={`Cursos associados:`}
-                                                            placeholder={'Cursos associados'}
-                                                            icon={'fa fa-course'}
-                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                 </div>
@@ -220,78 +321,170 @@ class Editar extends Component{
                                         <div className="card">
                                             <div className="card-body">
                                                 <div>
-                                                    <label>Cursos associados</label>
+                                                    <label>Selecione os cursos</label>
                                                 </div>
-                                                <div className="buttons">
-                                                    <button type="button" onClick={() => push('cursosAssociados', undefined)}>
-                                                        Adicionar curso
-                                                    </button>
-                                                    <button type="button" onClick={() => pop('cursosAssociados')}>
-                                                        Remover curso
-                                                    </button>
-                                                </div>
-                                                <FieldArray name="cursosAssociados">
-                                                    {({ fields }) => 
-                                                        {
-                                                            let nameCurrent = 0
-                                                            let indexCurrent = 0
-                                                            
-                                                            const html = ""
-                                                            fields.map( (name, index) => {
-                                                                nameCurrent = name
-                                                                indexCurrent = index 
-                                                                
-                                                                // html = <div className="row">
-                                                                //     <div key={keys[index] + `curso`} className="col-md-4">
-                                                                //         {/* <label>{index + 1}</label> */}
-                                                                //         <Field
-                                                                //             name={`${name}.curso`}
-                                                                //             label={`Curso`}
-                                                                //             component={Input}
-                                                                //             placeholder="curso"
-                                                                //         />
-                                                                //         <span onClick={() => { fields.remove(index); queueMicrotask(() => keys.splice(index, 1)); }} style={{ cursor: "pointer" }}>
-                                                                //             x
-                                                                //         </span>
-                                                                //     </div>
-                                                                // </div>
+                                                <div className="row justify-content-center">
+                                                    <div className="col-md-4 offset-1">
+                                                        <div className={`form-group`}>
+                                                            <div className="">
+                                                                <label>&nbsp;</label>
+                                                            </div>
+                                                            <button className="btn btn-success" type="button" onClick={() => push('cursosAssociados', {})}>
+                                                                Adicionar
+                                                            </button>
+                                                        </div>  
+                                                    </div> 
+                                                    <div className="col-md-4 offset-1">
+                                                        <div className={`form-group`}>
+                                                            <div className="">
+                                                                <label>&nbsp;</label>
+                                                            </div>  
+                                                            <button className="btn btn-danger" type="button" onClick={() => pop('cursosAssociados')}>
+                                                                Remover
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <FieldArray name="cursosAssociados">
+                                                            {({ fields }) => 
+                                                                {
+                                                                    let nameCurrent = 0
+                                                                    
+                                                                    fields.map( (name) => {
+                                                                        nameCurrent = name
+                                                                    })
 
-                                                            })
-                                                            
-                                                            if(fields.value && fields.value.length > 0){
-                                                                return(
-                                                                    <div className="row">
-                                                                        <div className="col-md-4">
-                                                                            <Field
-                                                                                name={`${nameCurrent}.curso`}
-                                                                                label={`curso`}
-                                                                                component={Input}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="col-md-4">
-                                                                            <Field
-                                                                                name={`${nameCurrent}.semestre`}
-                                                                                label={`semestre`}
-                                                                                component={Input}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="col-md-4">
-                                                                            <Field
-                                                                                name={`${nameCurrent}.cargaHoraria`}
-                                                                                label={`cargaHoraria`}
-                                                                                component={Input}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                )
-                                                            }else{
-                                                                return ''
+                                                                    if(fields.value && fields.value.length > 0){
+                                                                        return(
+                                                                            <div>
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6">
+                                                                                        <Field
+                                                                                            component={SelectMultiple}
+                                                                                            name={`${nameCurrent}[curso]`}
+                                                                                            options={cursos}
+                                                                                            label={`Curso`}
+                                                                                            isMulti
+                                                                                            closeMenu
+                                                                                            multiple={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div className="col-md-4">
+                                                                                        <Field
+                                                                                            component={SelectMultiple}
+                                                                                            name={`${nameCurrent}[semestre]`}
+                                                                                            options={semestre}
+                                                                                            label={`Semestre`}
+                                                                                            isMulti
+                                                                                            closeMenu
+                                                                                            multiple={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div className="col-md-2">
+                                                                                        <Field
+                                                                                             component={Input} 
+                                                                                             type={`number`}
+                                                                                             name={`${nameCurrent}[cargaHoraria]`} 
+                                                                                             placeholder={`10h`}
+                                                                                             label={`Carga Horária:`}
+                                                                                             icon={'fa fa-time'}
+                                                                                        />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="row">
+                                                                                    {this.cursosSelecionados(values.cursosAssociados, fields)}
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    }else{
+                                                                        return ''
+                                                                    }
+                                                                    
+                                                                }
                                                             }
-
-                                                        }
-                                                    }
-                                                </FieldArray>
-                                                <pre>{JSON.stringify(values, 0, 2)}</pre>
+                                                        </FieldArray>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div>
+                                                    <label>Habilitar inscrição no aluno on-line</label>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                        <Field 
+                                                            component={Input} 
+                                                            type={`date`}
+                                                            name={`aonlineDtIni`} 
+                                                            placeholder={`Data inicio`}
+                                                            label={`Data início de divulgação no on-line:`}
+                                                            icon={'fa fa-calendar'}
+                                                            validate={FORM_RULES.required}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-4">
+                                                        <Field 
+                                                            component={Input} 
+                                                            type={`date`}
+                                                            name={`aonlineDtFim`} 
+                                                            placeholder={`Data inicio`}
+                                                            label={`Data fim de divulgação no on-line:`}
+                                                            icon={'fa fa-calendar'}
+                                                            validate={FORM_RULES.required}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-md-3">
+                                                        <Field 
+                                                            component={Checkbox} 
+                                                            type={`checkbox`}
+                                                            name={`aonlineInscr`} 
+                                                            label={`Inscrição on-line`}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-4">
+                                                        <Field 
+                                                            component={Checkbox} 
+                                                            type={`checkbox`}
+                                                            name={`atv_aonline`} 
+                                                            label={`Atividade no Docente On-line`}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-5">
+                                                        <Field 
+                                                            component={Checkbox} 
+                                                            type={`checkbox`}
+                                                            name={`blackboard`} 
+                                                            label={`Disciplina será ministrada no blackboard ?`}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row justify-content-center">
+                                                    <div className="col-md-3">
+                                                        <Field
+                                                            component={Button}
+                                                            type={`submit`}
+                                                            icon={`fa fa-save`} 
+                                                            color={`btn-primary`}
+                                                            disabled={loadingSelect} 
+                                                            description={`Alterar`}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-3">
+                                                        <button type={`button`} className={`btn btn-default btn-block`} onClick={() => this.props.history.goBack()}>
+                                                            <i className="fa fa-arrow-left"></i> Voltar
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -316,7 +509,7 @@ const mapStateToProps = state => ({ subAtividades: state.AtvSubAtividades })
 /**
  * @param {*} dispatch 
  */
-const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ salvarAluno, buscarDadosEditarSubAtividade }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps )(Editar);

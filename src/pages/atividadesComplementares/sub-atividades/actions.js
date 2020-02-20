@@ -33,6 +33,27 @@ export const buscarDadosSubAtividadeForm = (params = []) => {
         })
 
     }
+}
+
+export const buscarDadosEditarSubAtividade = () => {
+
+    const endPoint = URL + 'atividades-complementares/sub-atividade/formData';
+
+    return dispatch => {
+        
+        dispatch({type: type.LOAD_SELECT, payload: true})
+
+        axios.post(endPoint, {})
+            .then(response => {
+
+                dispatch({ type: type.FORM_EDIT_SUB_ATIVIDADE, payload: response })
+
+            })
+            .catch(error => {
+                dispatch({type: type.ERROR, payload: false})
+        })
+
+    }
 
 }
 
@@ -78,28 +99,25 @@ export const salvarAluno = (params) => {
  */
 export const removerSubatividade = (params) => {
 
-    const endPoint = URL
+    const endPoint = URL + 'atividades-complementares/sub-atividade/deletar'
     
-    const parametro = {
-        aluno: ''
-    }
+    const parametro = params
     
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        setTimeout(function(){ 
-            dispatch({ type: type.REMOVER_ALUNO, payload: [] })
-        }, 1000);
+        axios.post(endPoint, parametro)
+        .then(response => {
 
-        // axios.post(endPoint, parametros)
-        // .then(response => {
-        //     dispatch({ type: type.BUSCAR_ATIVIDADES, payload: response })
-        // })
-        // .catch(error => {
-        //     dispatch({type: type.ERROR, payload: false})
-        //     console.log(error)
-        // })
+            console.log(response)
+            dispatch(buscarSubAtividade(parametro))
+            
+        })
+        .catch(error => {
+            dispatch({type: type.ERROR, payload: false})
+            console.log(error)
+        })
 
     }
 

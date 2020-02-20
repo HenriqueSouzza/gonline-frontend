@@ -29,14 +29,33 @@ const list = [
 
 class SubAtividades extends Component{
 
-
+    /**
+     * 
+     */
     componentDidMount(){
         this.props.buscarDadosSubAtividadeForm()
     }
 
-
+    /**
+     * 
+     */
     handleChange = (values) => {
-        this.props.buscarDadosSubAtividadeForm(values)
+        if(values.grupo){
+            this.props.buscarDadosSubAtividadeForm(values)
+        }
+    }
+
+    /**
+     * 
+     */
+    onDelete = (value) => {
+        const dados = this.props.subAtividades.list.find(row => (row.SUB_ATIVIDADE == value))
+        const params ={
+            subAtividade: dados.SUB_ATIVIDADE,
+            grupo: dados.TIPO_ATIV_COMPL, 
+            atividade: dados.ATIVIDADE
+        }
+        this.props.removerSubatividade(params);
     }
 
     /**
@@ -141,8 +160,8 @@ class SubAtividades extends Component{
                                 columns={columns} 
                                 data={list} 
                                 router={this.props.history}
-                                actionDelete={false}
-                                btnAdd={true} 
+                                actionDelete={this.onDelete}
+                                btnAdd={list.length > 0} 
                                 actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
                                 loading={loading} 
                                 /> 

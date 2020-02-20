@@ -6,7 +6,8 @@ const INITIAL_STATE = {
     grupoSelect: [],
     atividadeSelect: [],
     loading: false,
-    loadingSelect: false
+    loadingSelect: false,
+    formEditData: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +33,9 @@ export default (state = INITIAL_STATE, action) => {
             const arrChave = Object.keys(action.payload.data)
             const chave = arrChave[0] + 'Select'
             return { ...state, [chave]: action.payload.data || INITIAL_STATE.listSelect, loadingSelect: false, loading: false } 
+
+        case type.FORM_EDIT_SUB_ATIVIDADE:
+            return {...state, formEditData: action.payload.data || INITIAL_STATE.list, loadingSelect: false}
 
         default:
             return state;   
