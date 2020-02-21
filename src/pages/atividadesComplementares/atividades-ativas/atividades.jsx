@@ -87,6 +87,8 @@ class AtividadesAtivas extends Component{
             ))
         }
 
+        console.log(listSelect)
+
         return(
             <section className="content">
                 <MenuHeader title={`Atividades ativas por período`} history={this.props.location.pathname} />

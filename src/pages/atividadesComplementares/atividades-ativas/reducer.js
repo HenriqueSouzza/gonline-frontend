@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
         case type.BUSCAR_ATIVIDADES_ATIVAS:
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
         
-        case type.BUSCAR_ATIVIDADES__ATIVAS_SELECT:
+        case type.BUSCAR_ATIVIDADES_ATIVAS_SELECT:
             return { ...state, listSelect: action.payload.data || INITIAL_STATE.listSelect, loading: false }        
 
         default:
