@@ -105,7 +105,7 @@ export const salvarSubAtividade = (params) => {
 
         })
         .catch(error => {
-            dispatch({type: type.ERROR, payload: false})
+            dispatch({type: type.ERROR})
         })
 
     }

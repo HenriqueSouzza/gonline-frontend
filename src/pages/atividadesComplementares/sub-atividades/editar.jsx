@@ -18,6 +18,8 @@ import SelectMultiple from '../../../components/form/selectMultiple';
 
 import Input from '../../../components/form/input';
 
+import Upload from '../../../components/form/upload';
+
 import { alterarSubAtividade, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
@@ -96,13 +98,41 @@ class Editar extends Component{
         }
     }
 
+    handleChange = value => {
+        console.log(value)
+    }
+
     onSubmit = async value => {
+        
+        const formData = new FormData();
+
         const dados = this.props.subAtividades.list.find(row => (row.SUB_ATIVIDADE == this.props.match.params.subatividade))
+
         value.tipo = dados.TIPO_ATIV_COMPL
         value.atividade = dados.ATIVIDADE
         value.cursoResp = dados.CURSO_RESP
         value.subatividade = dados.SUB_ATIVIDADE
+        
+        formData.append('descSubAtividade', value.descSubAtividade)
+        formData.append('dataInicio', value.dataInicio)
+        formData.append('dataFim', value.dataFim)
+        formData.append('instituicao', value.instituicao)
+        formData.append('cursoResp', value.cursoResp)
+        formData.append('vagas', value.vagas)
+        formData.append('horario', value.horario)
+        formData.append('local', value.local)
+        formData.append('aonlineDtIni', value.aonlineDtIni)
+        formData.append('aonlineDtFim', value.aonlineDtFim)
+        formData.append('blackboard', value.blackboard)
+        formData.set('cursosAssociados', JSON.stringify(value.cursosAssociados))
+        formData.append('ementa', value.ementa)
+        formData.append('tipo', value.tipo)
+        formData.append('atividade', value.atividade)
+        formData.append('subatividade', value.subatividade)
+
         console.log(value)
+
+        this.props.alterarSubAtividade(formData)
     }
 
     render(){
@@ -217,7 +247,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`text`}
-                                                            name={`descSubAtividade`} 
+                                                            name={`descricao`} 
                                                             placeholder={`Descrição da subatividade`}
                                                             label={`Nome sub-atividade (nome fantasia):`}
                                                             icon={'fa fa-user'}
@@ -230,7 +260,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`dataInicio`} 
+                                                            name={`data_inicio`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data início:`}
                                                             icon={'fa fa-calendar'}
@@ -240,7 +270,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`dataFim`} 
+                                                            name={`data_fim`} 
                                                             placeholder={`Data fim`}
                                                             label={`Data fim:`}
                                                             icon={'fa fa-calendar'}
@@ -265,7 +295,7 @@ class Editar extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
-                                                            name={`docente`} 
+                                                            name={`num_func`} 
                                                             data={docente}
                                                             label={`Docente responsável:`}
                                                             />
@@ -296,14 +326,14 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`text`}
-                                                            name={`local`} 
+                                                            name={`local_ativ`} 
                                                             label={`Local:`}
                                                             icon={'fa fa-globe'}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
-                                                            component={Input} 
+                                                            component={Upload} 
                                                             type={`file`}
                                                             name={`ementa`} 
                                                             label={`Ementa:`}
@@ -414,7 +444,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`aonlineDtIni`} 
+                                                            name={`aonline_dt_ini`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data início de divulgação no on-line:`}
                                                             icon={'fa fa-calendar'}
@@ -425,7 +455,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`aonlineDtFim`} 
+                                                            name={`aonline_dt_fim`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data fim de divulgação no on-line:`}
                                                             icon={'fa fa-calendar'}
@@ -438,7 +468,7 @@ class Editar extends Component{
                                                         <Field 
                                                             component={Checkbox} 
                                                             type={`checkbox`}
-                                                            name={`aonlineInscr`} 
+                                                            name={`aonline_inscr`} 
                                                             label={`Inscrição on-line`}
                                                         />
                                                     </div>

@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
 
         //Caso retornar algum erro
         case type.ERROR:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false, loadingSelect: false }
+            return { ...state, loading: false, loadingSelect: false }
 
         //Caso para buscar grupo de atividades
         case type.BUSCAR_SUB_ATIVIDADE:

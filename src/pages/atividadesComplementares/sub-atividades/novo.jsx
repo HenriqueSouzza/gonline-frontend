@@ -18,8 +18,6 @@ import Button from '../../../components/form/button';
 
 import Input from '../../../components/form/input';
 
-import TableAction from './tableAction';
-
 import { salvarSubAtividade, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
@@ -103,7 +101,9 @@ class Novo extends Component{
     }
 
     onSubmit = async value => {
-        console.log(value)
+        if(value.cursosAssociados && value.cursosAssociados.length > 0 && value.cursosAssociados[0].curso && value.cursosAssociados[0].semestre && value.cursosAssociados[0].cargaHoraria){
+            this.props.salvarSubAtividade(value)
+        }
     }
 
     render(){
@@ -185,7 +185,7 @@ class Novo extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
-                                                            name={`grupo`} 
+                                                            name={`tipo_ativ_compl`} 
                                                             data={grupo}
                                                             label={`Grupo atividade:`}
                                                             validate={FORM_RULES.required}
@@ -205,7 +205,7 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`text`}
-                                                            name={`descSubAtividade`} 
+                                                            name={`descricao`} 
                                                             label={`Descrição da Sub-Atividade:`}
                                                             validate={FORM_RULES.required}
                                                             />
@@ -216,7 +216,7 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`dataInicio`} 
+                                                            name={`data_inicio`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data início:`}
                                                             icon={'fa fa-calendar'}
@@ -226,7 +226,7 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`dataFim`} 
+                                                            name={`data_fim`} 
                                                             placeholder={`Data fim`}
                                                             label={`Data fim:`}
                                                             icon={'fa fa-calendar'}
@@ -246,7 +246,7 @@ class Novo extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
-                                                            name={`docente`} 
+                                                            name={`num_func`} 
                                                             data={docente}
                                                             label={`Docente responsável:`}
                                                             />
@@ -277,7 +277,7 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`text`}
-                                                            name={`local`} 
+                                                            name={`local_ativ`} 
                                                             label={`Local:`}
                                                             icon={'fa fa-globe'}
                                                             />
@@ -294,7 +294,7 @@ class Novo extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
-                                                            name={`cursoResp`} 
+                                                            name={`curso`} 
                                                             data={cursosSelect}
                                                             label={`Curso responsável:`}
                                                             validate={FORM_RULES.required}
@@ -404,22 +404,20 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`aonlineDtIni`} 
+                                                            name={`aonline_dt_ini`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data início de divulgação no on-line:`}
                                                             icon={'fa fa-calendar'}
-                                                            validate={FORM_RULES.required}
                                                         />
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Input} 
                                                             type={`date`}
-                                                            name={`aonlineDtFim`} 
+                                                            name={`aonline_dt_fim`} 
                                                             placeholder={`Data inicio`}
                                                             label={`Data fim de divulgação no on-line:`}
                                                             icon={'fa fa-calendar'}
-                                                            validate={FORM_RULES.required}
                                                         />
                                                     </div>
                                                 </div>
@@ -428,7 +426,7 @@ class Novo extends Component{
                                                         <Field 
                                                             component={Checkbox} 
                                                             type={`checkbox`}
-                                                            name={`aonlineInscr`} 
+                                                            name={`aonline_inscr`} 
                                                             label={`Inscrição on-line`}
                                                         />
                                                     </div>
