@@ -134,7 +134,6 @@ class Novo extends Component{
             })  
         } 
 
-        
         const cursos = [];
 
         const cursosSelect = [];

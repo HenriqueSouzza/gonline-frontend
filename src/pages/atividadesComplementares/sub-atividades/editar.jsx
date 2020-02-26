@@ -113,24 +113,25 @@ class Editar extends Component{
         value.cursoResp = dados.CURSO_RESP
         value.subatividade = dados.SUB_ATIVIDADE
         
-        formData.append('descSubAtividade', value.descSubAtividade)
+        formData.append('descricao', value.descricao)
         formData.append('dataInicio', value.dataInicio)
         formData.append('dataFim', value.dataFim)
         formData.append('instituicao', value.instituicao)
-        formData.append('cursoResp', value.cursoResp)
+        formData.append('curso', value.cursoResp)
         formData.append('vagas', value.vagas)
         formData.append('horario', value.horario)
-        formData.append('local', value.local)
-        formData.append('aonlineDtIni', value.aonlineDtIni)
-        formData.append('aonlineDtFim', value.aonlineDtFim)
+        formData.append('local_ativ', value.local_ativ)
+        formData.append('aonline_dt_ini', value.aonline_dt_ini)
+        formData.append('aonline_dt_fim', value.aonline_dt_fim)
         formData.append('blackboard', value.blackboard)
+        formData.append('num_func', value.docente)
         formData.set('cursosAssociados', JSON.stringify(value.cursosAssociados))
         formData.append('ementa', value.ementa)
-        formData.append('tipo', value.tipo)
+        formData.append('tipo_ativ_compl', value.tipo)
         formData.append('atividade', value.atividade)
-        formData.append('subatividade', value.subatividade)
+        formData.append('sub_atividade', value.subatividade)
 
-        console.log(value)
+        console.log(value, formData.get('tipo_ativ_compl'))
 
         this.props.alterarSubAtividade(formData)
     }
@@ -177,27 +178,37 @@ class Editar extends Component{
 
         if(dados){
 
-            dados.CURSOS.map( row => {
-                cursoAssociadosCurso.push( { value: row[0], label: row[0] + ' - ' + row[1] })
-            })
+            if(dados.CURSOS){
+                dados.CURSOS.map( row => {
+                    if(row[0]){
+                        cursoAssociadosCurso.push( { value: row[0], label: row[0] + ' - ' + row[1] })
+                    }
+                })
+            }
 
-            const semestreTemp = dados.SEMESTRE.split('-')
-            semestreTemp.map(row => {
-                cursoAssociadosSemestre.push( {value: row, label: row })
-            })
+            if(dados.SEMESTRE){
+
+                const semestreTemp  = dados.SEMESTRE.split('-')
+
+                semestreTemp.map(row => {
+                    cursoAssociadosSemestre.push( {value: row, label: row })
+                })
+
+            }
         }
 
         const initialValues = {
-            descSubAtividade: dados ? dados.DESCRICAO : '',
+            descricao: dados ? dados.DESCRICAO : '',
             dataInicio: dados ? dados.DATA_INICIO : '', 
             dataFim: dados ? dados.DATA_FIM : '',
             instituicao: dados ? dados.INSTITUICAO : '',
             cursoResp: dados ? dados.CURSO_RESP : '',
             vagas: dados ? dados.VAGAS : '',
             horario: dados ? dados.HORARIO : '',
-            local: dados ? dados.LOCAL_ATIV : '',
-            aonlineDtIni: dados ? dados.AONLINE_DT_INI : '', 
-            aonlineDtFim: dados ? dados.AONLINE_DT_FIM : '', 
+            local_ativ: dados ? dados.LOCAL_ATIV : '',
+            aonline_dt_ini: dados ? dados.AONLINE_DT_INI : '', 
+            aonline_dt_fim: dados ? dados.AONLINE_DT_FIM : '', 
+            ementa: dados ? dados.EMENTA : '', 
             blackboard: dados ? dados.BLACKBOARD : '',
             cursosAssociados: [{
                 curso: cursoAssociadosCurso,
@@ -316,7 +327,7 @@ class Editar extends Component{
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Input} 
-                                                            type={`text`}
+                                                            type={`time`}
                                                             name={`horario`} 
                                                             label={`Horário:`}
                                                             icon={'fa fa-hourglass'}

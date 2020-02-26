@@ -93,6 +93,11 @@ export const salvarSubAtividade = (params) => {
 
     const parametro = params
 
+    const dados = {
+        atividade: params.atividade,
+        grupo: params.tipo_ativ_compl
+    }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
@@ -101,7 +106,7 @@ export const salvarSubAtividade = (params) => {
         .then(response => {
 
             console.log(response)
-            dispatch(buscarSubAtividade(parametro))
+            dispatch(buscarSubAtividade(dados))
 
         })
         .catch(error => {
@@ -122,6 +127,11 @@ export const alterarSubAtividade = (params) => {
 
     const parametro = params
 
+    const dados = {
+        atividade: params.get('atividade'),
+        grupo: params.get('tipo_ativ_compl')
+    }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
@@ -130,7 +140,7 @@ export const alterarSubAtividade = (params) => {
         .then(response => {
 
             console.log(response)
-            dispatch(buscarSubAtividade(parametro))
+            dispatch(buscarSubAtividade(dados))
 
         })
         .catch(error => {
