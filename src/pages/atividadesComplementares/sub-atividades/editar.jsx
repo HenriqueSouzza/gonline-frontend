@@ -114,8 +114,8 @@ class Editar extends Component{
         value.subatividade = dados.SUB_ATIVIDADE
         
         formData.append('descricao', value.descricao)
-        formData.append('dataInicio', value.dataInicio)
-        formData.append('dataFim', value.dataFim)
+        formData.append('data_inicio', value.data_inicio)
+        formData.append('data_fim', value.data_fim)
         formData.append('instituicao', value.instituicao)
         formData.append('curso', value.cursoResp)
         formData.append('vagas', value.vagas)
@@ -124,14 +124,14 @@ class Editar extends Component{
         formData.append('aonline_dt_ini', value.aonline_dt_ini)
         formData.append('aonline_dt_fim', value.aonline_dt_fim)
         formData.append('blackboard', value.blackboard)
-        formData.append('num_func', value.docente)
+        formData.append('num_func', value.num_func)
         formData.set('cursosAssociados', JSON.stringify(value.cursosAssociados))
         formData.append('ementa', value.ementa)
         formData.append('tipo_ativ_compl', value.tipo)
         formData.append('atividade', value.atividade)
         formData.append('sub_atividade', value.subatividade)
 
-        console.log(value, formData.get('tipo_ativ_compl'))
+        console.log(value)
 
         this.props.alterarSubAtividade(formData)
     }
@@ -147,6 +147,14 @@ class Editar extends Component{
                 docente.push({id: row.NUM_FUNC, name: row.NOME_COMPL})
             })  
         } 
+
+        const instituicao = []
+
+        if(formEditData.instituicao){
+            formEditData['instituicao'].map(row => {
+                instituicao.push({id: row.OUTRA_FACULDADE, name: row.NOME_COMP})
+            })
+        }
 
         const cursos = [];
 
@@ -199,10 +207,9 @@ class Editar extends Component{
 
         const initialValues = {
             descricao: dados ? dados.DESCRICAO : '',
-            dataInicio: dados ? dados.DATA_INICIO : '', 
-            dataFim: dados ? dados.DATA_FIM : '',
+            data_inicio: dados ? dados.DATA_INICIO : '', 
+            data_fim: dados ? dados.DATA_FIM : '',
             instituicao: dados ? dados.INSTITUICAO : '',
-            cursoResp: dados ? dados.CURSO_RESP : '',
             vagas: dados ? dados.VAGAS : '',
             horario: dados ? dados.HORARIO : '',
             local_ativ: dados ? dados.LOCAL_ATIV : '',
@@ -210,6 +217,7 @@ class Editar extends Component{
             aonline_dt_fim: dados ? dados.AONLINE_DT_FIM : '', 
             ementa: dados ? dados.EMENTA : '', 
             blackboard: dados ? dados.BLACKBOARD : '',
+            num_func: dados ? dados.NUM_FUNC : '',
             cursosAssociados: [{
                 curso: cursoAssociadosCurso,
                 semestre: cursoAssociadosSemestre,
@@ -289,8 +297,9 @@ class Editar extends Component{
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
-                                                            component={Input} 
+                                                            component={Select} 
                                                             name={`instituicao`} 
+                                                            data={instituicao}
                                                             label={`Instituição:`}
                                                             validate={FORM_RULES.required}
                                                             />

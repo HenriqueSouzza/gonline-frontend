@@ -87,15 +87,15 @@ export const buscarSubAtividade = (params) => {
 /**
  * Action Creator para guardar um aluno vinculado a uma atividade
  */
-export const salvarSubAtividade = (params) => {
+export const salvarSubAtividade = (params, router) => {
 
     const endPoint = URL + 'atividades-complementares/sub-atividade/salvar';
 
     const parametro = params
 
     const dados = {
-        atividade: params.atividade,
-        grupo: params.tipo_ativ_compl
+        atividade: params.get('atividade'), 
+        grupo: params.get('tipo_ativ_compl')
     }
 
     return dispatch => {
@@ -107,6 +107,7 @@ export const salvarSubAtividade = (params) => {
 
             console.log(response)
             dispatch(buscarSubAtividade(dados))
+            router.goBack()
 
         })
         .catch(error => {

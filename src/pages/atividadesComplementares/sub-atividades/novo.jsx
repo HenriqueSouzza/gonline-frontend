@@ -18,6 +18,8 @@ import Button from '../../../components/form/button';
 
 import Input from '../../../components/form/input';
 
+import Upload from '../../../components/form/upload';
+
 import { salvarSubAtividade, buscarDadosSubAtividadeForm, buscarDadosEditarSubAtividade } from './actions';
 
 import { FORM_RULES } from '../../../helpers/validations';
@@ -101,8 +103,32 @@ class Novo extends Component{
     }
 
     onSubmit = async value => {
+
+        const formData = new FormData();
+
+        formData.append('descricao', value.descricao)
+        formData.append('data_inicio', value.data_inicio ? value.data_inicio : null)
+        formData.append('data_fim', value.data_fim ? value.data_fim : null)
+        formData.append('instituicao', value.instituicao)
+        formData.append('curso', value.curso)
+        formData.append('vagas', value.vagas)
+        formData.append('horario', value.horario)
+        formData.append('local_ativ', value.local_ativ ? value.local_ativ : '')
+        formData.append('aonline_dt_ini', value.aonline_dt_ini)
+        formData.append('aonline_dt_fim', value.aonline_dt_fim)
+        formData.append('blackboard', value.blackboard ? value.blackboard : 0 )
+        formData.append('aonline_inscr', value.aonline_inscr ? value.aonline_inscr : 0 )
+        formData.append('atv_aonline', value.atv_aonline ? value.atv_aonline : 0 )
+        formData.append('num_func', value.num_func)
+        formData.set('cursosAssociados', JSON.stringify(value.cursosAssociados))
+        formData.append('ementa', value.ementa)
+        formData.append('tipo_ativ_compl', value.tipo_ativ_compl)
+        formData.append('atividade', value.atividade)
+
+        console.log(value)
+
         if(value.cursosAssociados && value.cursosAssociados.length > 0 && value.cursosAssociados[0].curso && value.cursosAssociados[0].semestre && value.cursosAssociados[0].cargaHoraria){
-            this.props.salvarSubAtividade(value)
+            this.props.salvarSubAtividade(formData, this.props.history)
         }
     }
 
@@ -133,6 +159,14 @@ class Novo extends Component{
                 docente.push({id: row.NUM_FUNC, name: row.NOME_COMPL})
             })  
         } 
+
+        const instituicao = []
+
+        if(formEditData.instituicao){
+            formEditData['instituicao'].map(row => {
+                instituicao.push({id: row.OUTRA_FACULDADE, name: row.NOME_COMP})
+            })
+        }
 
         const cursos = [];
 
@@ -219,6 +253,7 @@ class Novo extends Component{
                                                             placeholder={`Data inicio`}
                                                             label={`Data início:`}
                                                             icon={'fa fa-calendar'}
+                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
@@ -229,13 +264,14 @@ class Novo extends Component{
                                                             placeholder={`Data fim`}
                                                             label={`Data fim:`}
                                                             icon={'fa fa-calendar'}
+                                                            validate={FORM_RULES.required}
                                                             />
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
                                                             component={Select} 
                                                             name={`instituicao`} 
-                                                            data={grupo}
+                                                            data={instituicao}
                                                             label={`Instituição:`}
                                                             validate={FORM_RULES.required}
                                                             />
@@ -283,7 +319,7 @@ class Novo extends Component{
                                                     </div>
                                                     <div className="col-md-4">
                                                         <Field 
-                                                            component={Input} 
+                                                            component={Upload} 
                                                             type={`file`}
                                                             name={`ementa`} 
                                                             label={`Ementa:`}
