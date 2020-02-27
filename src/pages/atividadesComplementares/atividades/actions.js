@@ -125,6 +125,9 @@ export const alterarAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
+
+            toastr.success('The Title', 'the message')
+            
             router.goBack()
             dispatch(buscarAtividade({grupo: params.grupo}))
             

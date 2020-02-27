@@ -1,5 +1,6 @@
 import React from 'react';
 
+//
 import ReactDOM from 'react-dom';
 
 //Middleware responsável para fazer com que os componentes consiga visualizar a store através do connect
@@ -19,6 +20,9 @@ import thunk from 'redux-thunk';
 
 // import do auth ou app a idéia é se existir login e já renderiza para a aplicação, agora se não tiver e renderizar a pagina de login.
 import AuthOrApp from './main/AuthOrApp';
+
+//Importação do componente de Toast
+import Toastr from './components/messages/toastr';
 
 // Apresenta os estados de todos os componentes criados dentro da loja
 import reducers  from './reducers';
@@ -41,7 +45,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_E
 const store = applyMiddleware(multi, thunk, promise)(createStore)(reducers, devTools);
 
 
-ReactDOM.render(<Provider store={store}> <AuthOrApp /> </Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}> <AuthOrApp /> <Toastr/> </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

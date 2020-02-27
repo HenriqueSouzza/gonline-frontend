@@ -12,6 +12,7 @@ import 'admin-lte/dist/css/adminlte.min.css';
 import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
 import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
 import 'admin-lte/plugins/summernote/summernote-bs4.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 /***********************************************************************************************/
 /********************************* DEPENDECIAS DE JAVASCRIPT ***********************************/
