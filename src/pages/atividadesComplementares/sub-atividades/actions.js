@@ -105,13 +105,18 @@ export const salvarSubAtividade = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
-            dispatch(buscarSubAtividade(dados))
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             router.goBack()
+            dispatch(buscarSubAtividade(dados))
 
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR})
+
         })
 
     }
@@ -140,12 +145,16 @@ export const alterarSubAtividade = (params) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarSubAtividade(dados))
 
         })
         .catch(error => {
+
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR, payload: false})
+
         })
 
     }
@@ -168,13 +177,16 @@ export const removerSubatividade = (params) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarSubAtividade(parametro))
             
         })
         .catch(error => {
+
+            // console.log(error)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR, payload: false})
-            console.log(error)
         })
 
     }

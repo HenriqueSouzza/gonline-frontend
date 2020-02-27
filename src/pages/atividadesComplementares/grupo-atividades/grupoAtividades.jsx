@@ -22,7 +22,7 @@ class GrupoAtividades extends Component{
 
     onDelete = (codigo) => {
 
-        this.props.removerGrupoAtividade(codigo, this.props.history)
+        this.props.removerGrupoAtividade(codigo)
         
     }
 

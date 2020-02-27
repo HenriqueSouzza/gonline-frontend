@@ -82,14 +82,18 @@ export const salvarAluno = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             router.goBack();
             dispatch(buscarAluno(parametro))
 
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR, payload: false})
-            console.log(error)
+
         })
 
     }
@@ -113,12 +117,17 @@ export const salvarAlunoLyceum = (params) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarAluno(parametro[0]))
 
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
+
         })
 
     }
@@ -141,8 +150,11 @@ export const alterarAluno = (params, router, replicar) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            if(!replicar){
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
 
+            if(!replicar){
+                
                 dispatch([router.goBack(), buscarAluno(parametro[0])])
                 
             }else{
@@ -153,8 +165,11 @@ export const alterarAluno = (params, router, replicar) => {
             
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
+
         })
 
     }
@@ -177,13 +192,17 @@ export const removerAluno = (params) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarAluno(parametro))
 
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR, payload: false})
-            console.log(error)
+
         })
 
     }

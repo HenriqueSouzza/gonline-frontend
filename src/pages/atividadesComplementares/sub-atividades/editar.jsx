@@ -412,7 +412,7 @@ class Editar extends Component{
                                                                                             options={cursos}
                                                                                             label={`Curso`}
                                                                                             isMulti
-                                                                                            closeMenu
+                                                                                            closeMenu={false}
                                                                                             multiple={true}
                                                                                         />
                                                                                     </div>
@@ -423,7 +423,7 @@ class Editar extends Component{
                                                                                             options={semestre}
                                                                                             label={`Semestre`}
                                                                                             isMulti
-                                                                                            closeMenu
+                                                                                            closeMenu={false}
                                                                                             multiple={true}
                                                                                         />
                                                                                     </div>
@@ -525,7 +525,7 @@ class Editar extends Component{
                                                         />
                                                     </div>
                                                     <div className="col-md-3">
-                                                        <button type={`button`} className={`btn btn-default btn-block`} onClick={() => this.props.history.goBack()}>
+                                                        <button type={`button`} className={`btn btn-danger btn-block`} onClick={() => this.props.history.goBack()}>
                                                             <i className="fa fa-arrow-left"></i> Voltar
                                                         </button>
                                                     </div>

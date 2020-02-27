@@ -57,14 +57,16 @@ export const salvarGrupoAtividade = (params, router) => {
         .then(response => {
 
             console.log(response)
+            toastr.success('Sucesso', response.data.message)
             router.goBack()
             dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
 
+            // console.log(error)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
 
         })
 
@@ -76,7 +78,7 @@ export const salvarGrupoAtividade = (params, router) => {
  * Action creator para alterar um grupo de atividade
  * @param {*} params 
  */
-export const alterarGrupoAtividade = (params, router) => {
+export const alterarGrupoAtividade = (params) => {
 
     
     const endPoint = URL + 'atividades-complementares/gruposAtividades/alterar';
@@ -94,14 +96,17 @@ export const alterarGrupoAtividade = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
-            router.goBack()
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
-            console.log(error)
+            
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+
         })
 
     }
@@ -113,7 +118,7 @@ export const alterarGrupoAtividade = (params, router) => {
  * Action creator para remover um grupo de atividades
  * @param {*} params 
  */
-export const removerGrupoAtividade = (params, router) => {
+export const removerGrupoAtividade = (params) => {
 
     const endPoint = URL + 'atividades-complementares/gruposAtividades/deletar'
     
@@ -128,14 +133,16 @@ export const removerGrupoAtividade = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response.data)
+            // console.log(response.data)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarGrupoAtividade(parametro))
 
         })
         .catch(error => {
 
+            // console.log(error)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
 
         })
 

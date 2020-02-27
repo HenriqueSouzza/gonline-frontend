@@ -106,7 +106,7 @@ class Visualizar extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-12 text-right">
-                                    <button className={`btn btn-default`} onClick={() => this.props.history.goBack()}>
+                                    <button className={`btn btn-danger`} onClick={() => this.props.history.goBack()}>
                                         <i className="fa fa-arrow-left"></i> Voltar
                                     </button>
                                 </div>

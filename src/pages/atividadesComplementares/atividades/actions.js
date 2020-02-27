@@ -88,13 +88,17 @@ export const salvarAtividade = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
             router.goBack()
+            toastr.success('Sucesso', response.data.message)
             
         })
         .catch(error => {
-            console.log(error)
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+
         })
 
     }
@@ -104,7 +108,7 @@ export const salvarAtividade = (params, router) => {
 /**
  * Action Creator para alterar uma atividade
  */
-export const alterarAtividade = (params, router) => {
+export const alterarAtividade = (params) => {
 
     const endPoint = URL + 'atividades-complementares/atividades/alterar';
 
@@ -124,17 +128,17 @@ export const alterarAtividade = (params, router) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
-
-            toastr.success('The Title', 'the message')
-            
-            router.goBack()
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarAtividade({grupo: params.grupo}))
             
         })
         .catch(error => {
-            console.log(error)
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+            
         })
 
     }
@@ -161,13 +165,17 @@ export const removerAtividade = (params) => {
         axios.post(endPoint, parametro)
         .then(response => {
 
-            console.log(response)
+            // console.log(response)
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarAtividade({grupo: params.grupo}))
 
         })
         .catch(error => {
+
+            // console.log(error.response)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
+
         })
 
     }

@@ -164,7 +164,7 @@ class Novo extends Component{
                                                     />
                                             </div>
                                             <div className="col-md-2">
-                                                <button type={`button`} className={`btn btn-default btn-block`} onClick={() => this.props.history.goBack()}>
+                                                <button type={`button`} className={`btn btn-danger btn-block`} onClick={() => this.props.history.goBack()}>
                                                     <i className="fa fa-arrow-left"></i> Voltar
                                                 </button>
                                             </div>
