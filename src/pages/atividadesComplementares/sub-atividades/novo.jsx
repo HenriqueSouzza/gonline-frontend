@@ -125,8 +125,6 @@ class Novo extends Component{
         formData.append('tipo_ativ_compl', value.tipo_ativ_compl)
         formData.append('atividade', value.atividade)
 
-        console.log(value)
-
         if(value.cursosAssociados && value.cursosAssociados.length > 0 && value.cursosAssociados[0].curso && value.cursosAssociados[0].semestre && value.cursosAssociados[0].cargaHoraria){
             this.props.salvarSubAtividade(formData, this.props.history)
         }

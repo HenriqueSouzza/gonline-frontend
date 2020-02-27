@@ -54,12 +54,16 @@ export const buscarAtividadesSelect = () => {
 
         axios.post(endPoint, parametro)
         .then(response => {
-            console.log(response)
 
+            // console.log(response)
             dispatch({ type: type.BUSCAR_ATIVIDADES_ATIVAS_SELECT, payload: response })
+
         })
         .catch(error => {
+
+            // console.log(error.response)
             dispatch({type: type.ERROR, payload: false})
+
         })
 
     }

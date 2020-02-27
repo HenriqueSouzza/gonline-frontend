@@ -100,9 +100,7 @@ export const salvarAtividade = (params, router) => {
             dispatch({type: type.LOAD, payload: false})
 
         })
-
     }
-
 }
 
 /**

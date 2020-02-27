@@ -99,7 +99,6 @@ class Editar extends Component{
     }
 
     handleChange = value => {
-        console.log(value)
     }
 
     onSubmit = async value => {
@@ -130,8 +129,6 @@ class Editar extends Component{
         formData.append('tipo_ativ_compl', value.tipo)
         formData.append('atividade', value.atividade)
         formData.append('sub_atividade', value.subatividade)
-
-        console.log(value)
 
         this.props.alterarSubAtividade(formData)
     }

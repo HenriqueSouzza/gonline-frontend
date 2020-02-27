@@ -27,9 +27,8 @@ class AtividadesAtivas extends Component{
 
     onSubmit = async (values) => {
 
-        console.log(values)
-
         this.props.buscarAtividadesAtivas(values)
+
     }
 
     componentDidMount = () => {
@@ -86,8 +85,6 @@ class AtividadesAtivas extends Component{
                 })
             ))
         }
-
-        console.log(listSelect)
 
         return(
             <section className="content">
