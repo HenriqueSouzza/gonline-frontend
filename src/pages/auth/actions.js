@@ -12,14 +12,7 @@ export const efetuarLogin = (params, router) => {
 
     const endPoint = URL + 'atividades-complementares/atividades/salvar';
 
-    const parametro = {
-        atividade: params.atividade,
-        grupo: params.grupo,
-        descricao: params.descricao, 
-        requisito: params.requisitos,
-        classificacao: params.classificacao,
-        cargaHoraria: params.cargaHoraria
-    }
+    const parametro = params
 
     return dispatch => {
 
