@@ -63,8 +63,9 @@ function Table(props){
         columns.push({
             cell: row => <TableAction setVisibled={setVisibled} setMessage={setMessage} visibled={visibled} router={router} actions={actions} params={row[Object.keys(row)[0]]} setIdDelete={setIdDelete} />, 
             allowOverflow: true,
-            button: true,
-            width: '120px'
+            // button: true,
+            width: '120px',
+            name: 'Ações'
         })
     }
     

@@ -106,13 +106,13 @@ class Alunos extends Component{
     } 
 
     //Change do formulario
-    handleChange = values => {
+    handleChange = (values, state) => {
         if(values.nameAluno || values.subatividade){
 
         }else{
 
             if(values.atividade){
-                values.tipo = this.props.alunos.grupoSelect.grupo[0].TIPO_ATIV_COMPL
+                values.tipo = state.tipo
             }
             
             this.props.buscarDadosForm(values)
@@ -275,7 +275,7 @@ class Alunos extends Component{
                             />
                         </div>
                     </div>
-                    <div className={data.length <= 0 ? `d-md-none` : `card`}>
+                    <div className={list.length <= 0 ? `d-md-none` : `card`}>
                         <div className="card-header">
                             <h5>Aplicar na tabela</h5>
                         </div>

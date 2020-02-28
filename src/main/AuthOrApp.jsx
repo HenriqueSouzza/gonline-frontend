@@ -9,7 +9,7 @@ import Auth from'../pages/auth/auth';
 function AuthOrApp(){
     
     // const acessToken = localStorage.getItem('','')
-    const acessToken = ``
+    const acessToken = `a`
 
     if(acessToken){
         return(<App />)
