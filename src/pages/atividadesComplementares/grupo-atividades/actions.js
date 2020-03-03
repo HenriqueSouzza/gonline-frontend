@@ -20,16 +20,27 @@ export const buscarGrupoAtividade = (params = []) => {
         codigo: params.length > 0 ? params : ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
+
             dispatch({ type: type.BUSCAR_GRUPO_ATIVIDADE, payload: response })
+
         })
         .catch(error => {
+
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+
         })
 
     }
@@ -49,16 +60,21 @@ export const salvarGrupoAtividade = (params, router) => {
         grupo: params.grupo ? params.grupo : '',
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
-            console.log(response)
-            toastr.success('Sucesso', response.data.message)
             router.goBack()
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarGrupoAtividade(parametro))
 
         })
@@ -89,11 +105,17 @@ export const alterarGrupoAtividade = (params) => {
         codigo: params.codigo ? params.codigo : ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
@@ -126,11 +148,17 @@ export const removerGrupoAtividade = (params) => {
         codigo: params ? params : ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response.data)

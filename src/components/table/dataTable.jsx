@@ -86,7 +86,7 @@ function Table(props){
                 progressPending={loading} //loading
                 progressComponent={<CustomLoader />} //Icone do loading
                 pagination // Paginação
-                // noDataComponent={`Não existem dados para ser apresentados`} //Pode criar um componente customizado para apresentar quando não ouver dados
+                noDataComponent={`Não existem dados para ser apresentados`} //Pode criar um componente customizado para apresentar quando não ouver dados
             />
             <DialogContainer
                 id="speed-boost"

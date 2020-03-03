@@ -3,7 +3,6 @@ import type from './types';
 //Estado inicial da componente
 const INITIAL_STATE = {
     list: [],
-    listSelect: [],
     loading: false
 }
 
@@ -18,13 +17,10 @@ export default (state = INITIAL_STATE, action) => {
         case type.ERROR:
             return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }
 
-        //Caso para buscar grupo de atividades
-        case type.BUSCAR_ATIVIDADES:
-            return { ...state, list: action.payload.data || INITIAL_STATE.list, loading: false }        
-
-        //Caso para buscar grupo de atividades
-        case type.BUSCAR_ATIVIDADES_SELECT:
-            return { ...state, listSelect: action.payload.data || INITIAL_STATE.listSelect, loading: false }        
+        //Caso para Guar
+        case type.GUARDAR_TOKEN:
+            sessionStorage.setItem('token', action.payload.token)
+            return { ...state, list: action.payload || INITIAL_STATE.list, loading: false }        
 
         default:
             return state;   

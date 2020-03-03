@@ -17,17 +17,28 @@ export const buscarDadosForm = (params = []) => {
 
     const parametro = params
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD_SELECT, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
+
             dispatch({ type: type.ALUNOS_INSCRITOS_FORM, payload: [response, Object.keys(params)] })
+
         })
         .catch(error => {
+
+            // console.log(error)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.ERROR, payload: false})
-            console.log(error)
+
         })
 
     }
@@ -49,17 +60,27 @@ export const buscarAluno = (params) => {
         nomeAluno: params.nameAluno ? params.nameAluno : ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
+
             dispatch({ type: type.BUSCAR_ALUNOS_INSCRITOS, payload: response })
+
         })
         .catch(error => {
+
+            // console.log(error)
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
-            console.log(error)
         })
 
     }
@@ -75,16 +96,22 @@ export const salvarAluno = (params, router) => {
 
     const parametro = params
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
-            toastr.success('Sucesso', response.data.message)
             router.goBack();
+            toastr.success('Sucesso', response.data.message)
             dispatch(buscarAluno(parametro))
 
         })
@@ -110,11 +137,17 @@ export const salvarAlunoLyceum = (params) => {
 
     const parametro = params
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
@@ -143,11 +176,17 @@ export const alterarAluno = (params, router, replicar) => {
 
     const parametro = params
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
@@ -185,11 +224,17 @@ export const removerAluno = (params) => {
     
     const parametro = params
     
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)

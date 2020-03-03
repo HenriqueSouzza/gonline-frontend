@@ -491,7 +491,7 @@ class Novo extends Component{
                                                             type={`submit`}
                                                             icon={`fa fa-save`} 
                                                             color={`btn-primary`}
-                                                            disabled={loadingSelect} 
+                                                            disabled={loadingSelect || submitting || pristine} 
                                                             description={`Salvar`}
                                                         />
                                                     </div>

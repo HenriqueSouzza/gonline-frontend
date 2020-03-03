@@ -78,7 +78,7 @@ class Editar extends Component{
                             <Form
                                 onSubmit={this.onSubmit}
                                 initialValues={initialValues}
-                                render={({ handleSubmit }) => (
+                                render={({ handleSubmit, submitting, pristine }) => (
                                     <form onSubmit={handleSubmit}>
                                         <div className="row">
                                             <div className="col-md-4">
@@ -148,6 +148,7 @@ class Editar extends Component{
                                                     type={`submit`}
                                                     icon={`fa fa-edit`} 
                                                     color={`btn-success`}
+                                                    disabled={submitting || pristine}
                                                     description={`Alterar`}
                                                     />
                                             </div>

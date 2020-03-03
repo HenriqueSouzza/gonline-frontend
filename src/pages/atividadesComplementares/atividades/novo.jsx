@@ -133,6 +133,7 @@ class Novo extends Component{
                                                     icon={`fa fa-save`} 
                                                     color={`btn-success`}
                                                     description={`Salvar`}
+                                                    disabled={submitting || pristine}
                                                     />
                                             </div>
                                             <div className="col-md-2">

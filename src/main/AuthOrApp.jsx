@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import '../components/template/dependencies';
 
@@ -6,16 +6,36 @@ import App from'./App';
 
 import Auth from'../pages/auth/auth';
 
-function AuthOrApp(){
+class AuthOrApp extends Component{
     
-    // const acessToken = localStorage.getItem('','')
-    const acessToken = `a`
+    render(){
 
-    if(acessToken){
-        return(<App />)
-    }else{
-        return(<Auth />)
+        const token = sessionStorage.getItem('token')
+
+        const url_string = window.location.href;
+
+        const url = new URL(url_string);
+
+        const token_tmp = url.searchParams.get('key');
+
+        window.history.pushState("/", document.title, window.location.pathname);
+        
+        if(token_tmp || token){
+
+            sessionStorage.setItem('token', JSON.stringify({ token: token_tmp }))
+            
+            return(<App />)
+
+        }else{
+
+            return(<Auth />)
+
+        }
+
+        // return window.location.href = 'http://desenv-gonline.iesb.br'
+
     }
+
 }
 
 export default AuthOrApp;

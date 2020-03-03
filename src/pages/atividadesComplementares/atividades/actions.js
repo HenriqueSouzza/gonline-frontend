@@ -19,17 +19,29 @@ export const buscarAtividade = (params = []) => {
         grupo: params.grupo ? params.grupo : ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
+
             dispatch({ type: type.BUSCAR_ATIVIDADES, payload: response })
+
         })
         .catch(error => {
-            console.log(error)
+
+            // console.log(error)
+
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+
         })
 
     }
@@ -48,16 +60,25 @@ export const buscarAtividadeSelect = (params = []) => {
         grupo: ''
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
             dispatch({ type: type.BUSCAR_ATIVIDADES_SELECT, payload: response })
         })
         .catch(error => {
+
+            toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
+
         })
 
     }
@@ -81,11 +102,17 @@ export const salvarAtividade = (params, router) => {
         cargaHoraria: params.cargaHoraria
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
@@ -119,11 +146,17 @@ export const alterarAtividade = (params) => {
         cargaHoraria: params.cargaHoraria
     }
 
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
+
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)
@@ -155,12 +188,18 @@ export const removerAtividade = (params) => {
         atividade: params.atividade ? params.atividade : '',
         codigo: params.codigo ? params.codigo : ''
     }
+
+    const data_token = sessionStorage.getItem('token')
+
+    const token_temp = JSON.parse(data_token)
+
+    const headers = {'Authorization': token_temp.token }
     
     return dispatch => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro)
+        axios.post(endPoint, parametro, { headers: headers })
         .then(response => {
 
             // console.log(response)

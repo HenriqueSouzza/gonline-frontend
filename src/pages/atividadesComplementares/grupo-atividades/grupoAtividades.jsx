@@ -61,7 +61,7 @@ class GrupoAtividades extends Component{
                                 data={list} 
                                 router={this.props.history}
                                 actionDelete={this.onDelete}
-                                btnAdd={true} 
+                                btnAdd={list.length > 0} 
                                 actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
                                 loading={loading} 
                                 /> 
