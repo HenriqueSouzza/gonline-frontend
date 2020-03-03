@@ -8,7 +8,7 @@ function Menu(){
     return(
         <nav className="mt-2">
             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <MenuLink description={`Dashboard`} path={`/`} icon={`fas fa-tachometer-alt`}  active={``} />
+                {/* <MenuLink description={`Dashboard`} path={`/`} icon={`fas fa-tachometer-alt`}  active={``} /> */}
                 <MenuTreeView description={`Atividades Compl.`} path={`#`} icon={`fas fa-tasks`} >
                     <MenuLink description={`Alunos`} path={`/atividades-complementares/alunos`} icon={`fa fa-users`} active={``} />
                     <MenuLink description={`Atividades Ativas`} path={`/atividades-complementares/atividades-ativas`} icon={`fa fa-toggle-on`} active={``}/>

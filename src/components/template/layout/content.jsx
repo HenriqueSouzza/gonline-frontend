@@ -15,7 +15,8 @@ function Content(){
     return(
         <div className="content-wrapper">
             <Router history={history}>
-                <Route exact path='/' component={Dashboard} />
+                <Route exact path='/' component={AtividadesComplementares} />
+                {/* <Route exact path='/' component={Dashboard} /> */}
                 <Route path='/atividades-complementares' component={AtividadesComplementares} />
             </Router>
         </div>

@@ -18,11 +18,14 @@ class AuthOrApp extends Component{
 
         const token_tmp = url.searchParams.get('key');
 
+        const name_user = url.searchParams.get('user');
+
         window.history.pushState("/", document.title, window.location.pathname);
         
         if(token_tmp || token){
 
             sessionStorage.setItem('token', JSON.stringify({ token: token_tmp }))
+            sessionStorage.setItem('user', JSON.stringify({ user: name_user }))
             
             return(<App />)
 

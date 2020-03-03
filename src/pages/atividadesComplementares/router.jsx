@@ -30,6 +30,7 @@ function Router(){
     return(
         <Switch>
             {/*  */}
+            <Route exact path='/' component={ props => <Alunos {...props} />} />
             <Route exact path='/atividades-complementares/alunos' component={ props => <Alunos {...props} />} />
             <Route exact path='/atividades-complementares/alunos/novo' component={ props => <AlunosNovo {...props} />} />
             <Route exact path='/atividades-complementares/alunos/:ordem/editar' component={ props => <AlunosEditar {...props} />} />

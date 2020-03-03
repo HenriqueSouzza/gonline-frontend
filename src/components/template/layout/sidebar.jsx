@@ -8,6 +8,11 @@ import imgPerfil  from '../images/perfil.png';
 import imgLogo  from '../images/logo.png';
  
 function Sidebar() {
+
+    const user_temp = sessionStorage.getItem('user')
+
+    const user = JSON.parse(user_temp)
+
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             <Link to={`#`} className="brand-link">
@@ -20,7 +25,7 @@ function Sidebar() {
                         <img src={imgPerfil} className="img-circle elevation-2" alt={`UserImage`} />
                     </div>
                     <div className="info">
-                        <Link to={`#`} className="d-block">Henrique Souza</Link>
+                        <Link to={`#`} className="d-block">{ user.user ? user.user : 'Logue novamente' }</Link>
                     </div>
                 </div>
                 <Menu />
