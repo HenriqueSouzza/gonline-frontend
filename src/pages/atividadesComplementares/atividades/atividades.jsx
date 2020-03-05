@@ -40,15 +40,13 @@ class Atividades extends Component{
 
         const { loading, list, listSelect } = this.props.atividades
 
-        //Fazer uma especie de distinct em uma array de objeto para isso escolha uma chave ou propriedade para que seja feito o distinct
-        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO + ' - ' + row.DESC_GRUPO)))]
-
         const dataSelect = []
 
-        arrayDistinct.map(row => {
-            let arr = row.split('-')
-            dataSelect.push({id: arr[0].trim(), name: row})
-        })
+        if(listSelect.length > 0){
+            listSelect.map(row => {
+                dataSelect.push({id: row.GRUPO, name: row.GRUPO + ' - ' + row.DESCRICAO})
+            })
+        }
 
         const columns = [
             {
@@ -108,7 +106,7 @@ class Atividades extends Component{
                                 data={list} 
                                 router={this.props.history}
                                 actionDelete={this.onDelete}
-                                btnAdd={list.length > 0} 
+                                btnAdd={!loading} 
                                 actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
                                 loading={loading} 
                                 /> 

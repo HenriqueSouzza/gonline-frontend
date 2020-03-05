@@ -39,14 +39,13 @@ class Novo extends Component{
 
         const { listSelect } = this.props.atividades
 
-        const arrayDistinct = [...new Set(listSelect.map(row => (row.GRUPO + ' - ' + row.DESC_GRUPO)))]
-
         const grupoSelect = []
 
-        arrayDistinct.map(row => {
-            let arr = row.split('-')
-            grupoSelect.push({id: arr[0].trim(), name: row})
-        })
+        if(listSelect.length > 0){
+            listSelect.map(row => {
+                grupoSelect.push({id: row.GRUPO, name: row.GRUPO + ' - ' + row.DESCRICAO})
+            })
+        }
 
         const classificacaoSelect = [
             {id: 'ENSINO', name: 'ENSINO'},

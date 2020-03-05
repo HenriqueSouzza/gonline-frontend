@@ -157,8 +157,7 @@ export const salvarAlunoLyceum = (params) => {
         })
         .catch(error => {
 
-            // console.log(error.response)
-            toastr.error('Erro', error.response.data.message)
+            // toastr.error('Erro', error.response.data.message)
             dispatch({type: type.LOAD, payload: false})
 
         })

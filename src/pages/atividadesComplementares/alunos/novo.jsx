@@ -32,13 +32,13 @@ class Novo extends Component{
     }
 
     //Change do formulario
-    handleChange = values => {
+    handleChange = (values,state) => {
         if(values.aluno || values.subatividade){
 
         }else{
 
             if(values.atividade){
-                values.tipo = this.props.alunos.grupoSelect.grupo[0].TIPO_ATIV_COMPL
+                values.tipo = state.tipo
             }
             
             this.props.buscarDadosForm(values)

@@ -25,12 +25,6 @@ import Checkbox from '../../../components/form/checkbox';
 import { removerAluno, buscarDadosForm, buscarAluno, alterarAluno, salvarAlunoLyceum } from './actions';
 
 
-const data = [
-    { ordem: 1, aluno: '123456789', name: 'Teste da Ti', abandono: '1982', dataFim: 'm' },
-    { ordem: 2, aluno: '123456789', name: 'Donan the Barbarian', abandono: '1982', dataFim: 'm' },
-    { ordem: 3, aluno: '123456789', name: 'Ivan texeira', abandono: '1982', dataFim: 'm' },
-]
-
 class Alunos extends Component{
 
     constructor(props){

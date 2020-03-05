@@ -54,11 +54,9 @@ export const buscarAtividade = (params = []) => {
  */
 export const buscarAtividadeSelect = (params = []) => {
 
-    const endPoint = URL + 'atividades-complementares/atividades';
+    const endPoint = URL + '/atividades-complementares/atividades/formSelect';
 
-    const parametro = {
-        grupo: ''
-    }
+    const parametro = params
 
     const data_token = sessionStorage.getItem('token')
 
