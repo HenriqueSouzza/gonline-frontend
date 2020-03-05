@@ -29,12 +29,14 @@ class AuthOrApp extends Component{
         const token = sessionStorage.getItem('token')
 
         //Limpa a url
-        window.history.pushState("/", document.title, window.location.pathname);
-
+        if(token_tmp || name_user){
+            window.history.pushState("/", document.title, window.location.pathname);
+        }
+        
         if(validateToken || token){
-
+            
             const validateUser = name_user ? sessionStorage.setItem('user', JSON.stringify({ user: name_user })) : ''
-
+            
             return(<App />)
             
         }else{

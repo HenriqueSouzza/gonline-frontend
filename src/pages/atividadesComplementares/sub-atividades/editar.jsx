@@ -30,7 +30,6 @@ import { FieldArray } from 'react-final-form-arrays';
 
 
 
-
 /**
  * @param {*} props 
  */
@@ -98,9 +97,6 @@ class Editar extends Component{
         }
     }
 
-    handleChange = value => {
-    }
-
     onSubmit = async value => {
         
         const formData = new FormData();
@@ -111,7 +107,7 @@ class Editar extends Component{
         value.atividade = dados.ATIVIDADE
         value.cursoResp = dados.CURSO_RESP
         value.subatividade = dados.SUB_ATIVIDADE
-        
+
         formData.append('descricao', value.descricao)
         formData.append('data_inicio', value.data_inicio)
         formData.append('data_fim', value.data_fim)
@@ -123,7 +119,7 @@ class Editar extends Component{
         formData.append('aonline_dt_ini', value.aonline_dt_ini)
         formData.append('aonline_dt_fim', value.aonline_dt_fim)
         formData.append('blackboard', value.blackboard)
-        formData.append('num_func', value.num_func)
+        formData.append('num_func', value.num_func ? value.num_func : '')
         formData.set('cursosAssociados', JSON.stringify(value.cursosAssociados))
         formData.append('ementa', value.ementa)
         formData.append('tipo_ativ_compl', value.tipo)
@@ -179,26 +175,35 @@ class Editar extends Component{
         const dados = list.find(row => (row.SUB_ATIVIDADE == this.props.match.params.subatividade))
 
         const cursoAssociadosCurso = []
-        const cursoAssociadosSemestre = []
 
         if(dados){
 
             if(dados.CURSOS){
-                dados.CURSOS.map( row => {
-                    if(row[0]){
-                        cursoAssociadosCurso.push( { value: row[0], label: row[0] + ' - ' + row[1] })
-                    }
+
+                Object.values(dados.CURSOS).map( (row) => {
+                    const dadoCurso = []
+                    const dadoSemestre = [];
+                    let dadoCH;
+
+                    row.map( (dado) => {
+                        
+                        dadoCurso.push({ value: dado.curso, label: dado.curso + ' - ' + dado.nome_curso})
+
+                        dadoCH = dado.ch
+                        
+                    })
+
+                    const semestreTemp  = row[0].semestre.split('-')
+
+                    semestreTemp.map(sem => {
+                        dadoSemestre.push({value: sem, label: sem})
+                    })
+                    
+                    cursoAssociadosCurso.push({ curso : dadoCurso, semestre: dadoSemestre, cargaHoraria: dadoCH })
+
                 })
-            }
-
-            if(dados.SEMESTRE){
-
-                const semestreTemp  = dados.SEMESTRE.split('-')
-
-                semestreTemp.map(row => {
-                    cursoAssociadosSemestre.push( {value: row, label: row })
-                })
-
+                
+                console.log(cursoAssociadosCurso)
             }
         }
 
@@ -215,11 +220,7 @@ class Editar extends Component{
             ementa: dados ? dados.EMENTA : '', 
             blackboard: dados ? dados.BLACKBOARD : '',
             num_func: dados ? dados.NUM_FUNC : '',
-            cursosAssociados: [{
-                curso: cursoAssociadosCurso,
-                semestre: cursoAssociadosSemestre,
-                cargaHoraria: dados ? dados.CH : ''
-            }]
+            cursosAssociados: cursoAssociadosCurso
         }
 
         return(

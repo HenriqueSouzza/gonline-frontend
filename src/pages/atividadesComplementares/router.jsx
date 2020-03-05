@@ -32,7 +32,7 @@ function Router(props){
      * If temporário, porque o menu dashboard está desativado,
      * É necessário para forçar a aba alunos inscritos como página inicial
      */
-    if(props.history.location.pathname == '/'){
+    if(props.history.location.pathname === '/'){
         props.history.push('atividades-complementares/alunos')
     }
 

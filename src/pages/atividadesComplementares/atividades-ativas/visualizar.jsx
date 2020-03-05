@@ -25,7 +25,7 @@ class Visualizar extends Component {
         let dataItem = {}
 
         list.map(response => {
-            if(response.ATIVIDADE == this.props.match.params.atividade){
+            if(response.SUB_ATIVIDADE == this.props.match.params.atividade){
                 dataItem = response
             }
         })

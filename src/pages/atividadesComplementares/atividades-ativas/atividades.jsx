@@ -45,7 +45,7 @@ class AtividadesAtivas extends Component{
         const columns = [
             {
                 name: 'Atividade',
-                selector: 'ATIVIDADE',
+                selector: 'SUB_ATIVIDADE',
                 sortable: true,
             },
             {
@@ -80,7 +80,7 @@ class AtividadesAtivas extends Component{
         if(listSelect.length > 0){
             listSelect.map(response => (
                 dataSelect.push({
-                    id: response.ATIVIDADE,
+                    id: response.SUB_ATIVIDADE,
                     name: response.DESCRICAO
                 })
             ))
