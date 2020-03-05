@@ -11,7 +11,7 @@ function Sidebar() {
 
     const user_temp = sessionStorage.getItem('user')
 
-    const user = JSON.parse(user_temp)
+    const user = user_temp ? JSON.parse(user_temp) : null
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -25,7 +25,7 @@ function Sidebar() {
                         <img src={imgPerfil} className="img-circle elevation-2" alt={`UserImage`} />
                     </div>
                     <div className="info">
-                        <Link to={`#`} className="d-block">{ user.user ? user.user : 'Logue novamente' }</Link>
+                        <Link to={`#`} className="d-block">{ user && user.user ? user.user : 'Sem nome' }</Link>
                     </div>
                 </div>
                 <Menu />
