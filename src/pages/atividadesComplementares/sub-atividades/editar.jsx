@@ -192,7 +192,7 @@ class Editar extends Component{
                         dadoCH = dado.ch
                         
                     })
-
+                    
                     const semestreTemp  = row[0].semestre.split('-')
 
                     semestreTemp.map(sem => {
