@@ -203,7 +203,6 @@ class Editar extends Component{
 
                 })
                 
-                console.log(cursoAssociadosCurso)
             }
         }
 
