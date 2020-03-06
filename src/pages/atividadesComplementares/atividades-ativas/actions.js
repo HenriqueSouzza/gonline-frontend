@@ -17,7 +17,7 @@ export const buscarAtividadesAtivas = (params = []) => {
     const endPoint = URL + 'atividades-complementares/atividadesAtivas';
 
     const parametro = {
-        atividade: params.atividade ? params.atividade : '',
+        subatividade: params.subatividade ? params.subatividade : '',
         dataInicio: params.dataInicio ? params.dataInicio : '',
         dataFim: params.dataFim ? params.dataFim : '',
         ativo: params.ativo ? params.ativo : ''
@@ -52,7 +52,7 @@ export const buscarAtividadesSelect = () => {
     const endPoint = URL + 'atividades-complementares/atividadesAtivas';
 
     const parametro = {
-        atividade: '',
+        subatividade: '',
         dataInicio: '',
         dataFim: '',
         ativo: ''

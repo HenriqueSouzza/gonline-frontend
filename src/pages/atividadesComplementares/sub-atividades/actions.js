@@ -219,7 +219,7 @@ export const removerSubatividade = (params) => {
 
         dispatch({type: type.LOAD, payload: true})
 
-        axios.post(endPoint, parametro, headers)
+        axios.post(endPoint, parametro, { headers, headers })
         .then(response => {
 
             // console.log(response)

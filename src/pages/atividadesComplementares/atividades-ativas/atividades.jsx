@@ -100,7 +100,7 @@ class AtividadesAtivas extends Component{
                                             <div className="col-md-3">
                                                 <Field 
                                                     component={Select} 
-                                                    name={`atividade`} 
+                                                    name={`subatividade`} 
                                                     data={dataSelect}
                                                     label={`Escolha a atividade:`}
                                                     // validate={FORM_RULES.required}

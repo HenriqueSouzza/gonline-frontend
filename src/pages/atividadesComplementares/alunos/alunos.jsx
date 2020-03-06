@@ -282,7 +282,7 @@ class Alunos extends Component{
                                             <div className="col-md-3">
                                                 <label>&nbsp;</label>
                                                 <div className="input-group mb-3 justify-content-center">
-                                                    <button className="btn btn-secondary btn-block" type="button" disabled={this.state.checkbox.length <= 0 ? true : false} onClick={() => this.onExportLyceum()} name="exportLyceum">
+                                                    <button className="btn btn-secondary btn-block" type="button" disabled={this.state.checkbox.length <= 0 || loading ? true : false} onClick={() => this.onExportLyceum()} name="exportLyceum">
                                                         <i className="fa fa-upload"></i> Export para lyceum
                                                     </button>
                                                 </div>

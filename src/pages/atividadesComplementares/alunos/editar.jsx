@@ -41,6 +41,7 @@ class Editar extends Component{
         values.tipo = valuesForm.TIPO_ATIV_COMPL
         values.atividade = valuesForm.ATIVIDADE
         values.subatividade = valuesForm.SUB_ATIVIDADE
+        values.abandono = values.abandono ? '1' : '0'
 
         this.props.alterarAluno([values], this.props.history)
     }
