@@ -35,6 +35,11 @@ class Editar extends Component{
     onSubmit = async value => {
         
         value.atividade = this.props.match.params.atividade
+
+        const dataGrupo = this.props.atividades.listSelect.find(row => (row.GRUPO == value.grupo))
+
+        value.tipo_ativ_compl = dataGrupo.TIPO_ATIV_COMPL
+
         this.props.alterarAtividade(value, this.props.history)
 
     }
@@ -85,6 +90,7 @@ class Editar extends Component{
                                                     name={`grupo`} 
                                                     data={grupoSelect}
                                                     label={`Grupo:`}
+                                                    disabled
                                                     validate={FORM_RULES.required}
                                                     />
                                             </div>

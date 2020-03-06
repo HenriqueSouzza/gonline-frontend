@@ -24,12 +24,13 @@ import { buscarAtividade, buscarAtividadeSelect, removerAtividade } from './acti
 class Atividades extends Component{
 
     componentDidMount(){
-        this.props.buscarAtividadeSelect();
+        this.props.buscarAtividadeSelect({});
     }
 
     onDelete = (param) => {
         const list = this.props.atividades.list.find(row => (row.ATIVIDADE = param))
-        this.props.removerAtividade({ atividade:list.ATIVIDADE, codigo: list.TIPO_ATIV_COMPL, grupo: list.TIPO_ATIV_COMPL})
+
+        this.props.removerAtividade({ atividade:list.ATIVIDADE, codigo: list.TIPO_ATIV_COMPL, grupo: list.GRUPO})
     }
 
     onSubmit = async (values) => {
@@ -107,7 +108,7 @@ class Atividades extends Component{
                                 router={this.props.history}
                                 actionDelete={this.onDelete}
                                 btnAdd={!loading} 
-                                actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
+                                actions={[ACTION_RULES.can_edit]}
                                 loading={loading} 
                                 /> 
                         </div>

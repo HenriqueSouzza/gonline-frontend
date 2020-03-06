@@ -32,7 +32,14 @@ class Novo extends Component{
     }
 
     onSubmit = async value => {
-        this.props.salvarAtividade(value,this.props.history)
+        
+        const DadoGrupo = this.props.atividades.listSelect.find(row => (row.GRUPO == value.grupo))
+
+        value.grupo = DadoGrupo.TIPO_ATIV_COMPL
+
+        value.tipo_ativ_compl = DadoGrupo.GRUPO
+
+        this.props.salvarAtividade(value, this.props.history)
     }
 
     render(){
@@ -115,7 +122,7 @@ class Novo extends Component{
                                             <div className="col-md-4">
                                                 <Field 
                                                     component={Input} 
-                                                    type={`text`}
+                                                    type={`number`}
                                                     name={`cargaHoraria`} 
                                                     placeholder={`Carga horária`}
                                                     label={`Carga horária máxima:`}

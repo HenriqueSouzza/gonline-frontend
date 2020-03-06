@@ -11,7 +11,7 @@ const URL = `${BASE_API}`;
 /**
  * Action Creator para buscar atividades existentes
  */
-export const buscarAtividade = (params = []) => {
+export const buscarAtividade = (params) => {
 
     const endPoint = URL + 'atividades-complementares/atividades';
 
@@ -40,7 +40,7 @@ export const buscarAtividade = (params = []) => {
             // console.log(error)
 
             toastr.error('Erro', error.response.data.message)
-            dispatch({type: type.LOAD, payload: false})
+            dispatch({type: type.ERROR, payload: false})
 
         })
 
@@ -75,7 +75,7 @@ export const buscarAtividadeSelect = (params = []) => {
         .catch(error => {
 
             toastr.error('Erro', error.response.data.message)
-            dispatch({type: type.LOAD, payload: false})
+            dispatch({type: type.ERROR, payload: false})
 
         })
 
@@ -92,7 +92,6 @@ export const salvarAtividade = (params, router) => {
     const endPoint = URL + 'atividades-complementares/atividades/salvar';
 
     const parametro = {
-        atividade: params.atividade,
         grupo: params.grupo,
         descricao: params.descricao, 
         requisito: params.requisitos,
@@ -114,7 +113,7 @@ export const salvarAtividade = (params, router) => {
         .then(response => {
 
             // console.log(response)
-            router.goBack()
+            dispatch([router.goBack(), buscarAtividade({grupo: params.tipo_ativ_compl})])
             toastr.success('Sucesso', response.data.message)
             
         })
@@ -122,7 +121,7 @@ export const salvarAtividade = (params, router) => {
 
             // console.log(error.response)
             toastr.error('Erro', error.response.data.message)
-            dispatch({type: type.LOAD, payload: false})
+            dispatch({type: type.ERROR, payload: false})
 
         })
     }
@@ -131,13 +130,13 @@ export const salvarAtividade = (params, router) => {
 /**
  * Action Creator para alterar uma atividade
  */
-export const alterarAtividade = (params) => {
+export const alterarAtividade = (params, router) => {
 
     const endPoint = URL + 'atividades-complementares/atividades/alterar';
 
     const parametro = {
         atividade: params.atividade,
-        grupo: params.grupo,
+        grupo: params.tipo_ativ_compl,
         descricao: params.descricao, 
         requisito: params.requisitos,
         classificacao: params.classificacao,
@@ -159,14 +158,14 @@ export const alterarAtividade = (params) => {
 
             // console.log(response)
             toastr.success('Sucesso', response.data.message)
-            dispatch(buscarAtividade({grupo: params.grupo}))
+            dispatch([router.goBack(), buscarAtividade({grupo: params.grupo})])
             
         })
         .catch(error => {
 
             // console.log(error.response)
             toastr.error('Erro', error.response.data.message)
-            dispatch({type: type.LOAD, payload: false})
+            dispatch({type: type.ERROR, payload: false})
             
         })
 
@@ -202,7 +201,7 @@ export const removerAtividade = (params) => {
 
             // console.log(response)
             toastr.success('Sucesso', response.data.message)
-            dispatch(buscarAtividade({grupo: params.grupo}))
+            dispatch(buscarAtividade(params))
 
         })
         .catch(error => {
