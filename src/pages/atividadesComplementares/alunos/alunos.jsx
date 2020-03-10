@@ -339,7 +339,7 @@ class Alunos extends Component{
                                 router={this.props.history}
                                 actionDelete={this.onDelete}
                                 btnExportCSV={list.length > 0} //Propriedade para adicionar o botão de csv
-                                btnAdd={list.length > 0}
+                                btnAdd={!loading}
                                 actions={[ACTION_RULES.can_remove, ACTION_RULES.can_edit]}
                                 loading={loading}
                                 /> 
