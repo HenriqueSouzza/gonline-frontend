@@ -162,7 +162,8 @@ class SubAtividades extends Component{
                                 router={this.props.history}
                                 actionDelete={this.onDelete}
                                 btnAdd={!loading}
-                                actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
+                                // actions={[ACTION_RULES.can_edit, ACTION_RULES.can_remove]}
+                                actions={[ACTION_RULES.can_edit]}
                                 loading={loading} 
                                 /> 
                         </div>
