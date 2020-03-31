@@ -42,7 +42,7 @@ class AuthOrApp extends Component{
         }else{
             
             // return(<Auth />)
-            return window.location.href = 'http://desenv-gonline.iesb.br'
+            return window.location.href = 'http://gonline.iesb.br'
 
         }
 
