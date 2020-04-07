@@ -21,7 +21,7 @@ export const buscarDadosForm = (params = []) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -64,7 +64,7 @@ export const buscarAluno = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -100,7 +100,7 @@ export const salvarAluno = (params, router) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -141,7 +141,7 @@ export const salvarAlunoLyceum = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -179,7 +179,7 @@ export const alterarAluno = (params, router, replicar) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -227,7 +227,7 @@ export const removerAluno = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 

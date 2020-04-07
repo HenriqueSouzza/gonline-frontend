@@ -22,7 +22,7 @@ export const buscarDadosSubAtividadeForm = (params = []) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -52,7 +52,7 @@ export const buscarDadosEditarSubAtividade = () => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
         
@@ -88,7 +88,7 @@ export const buscarSubAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -130,7 +130,7 @@ export const salvarSubAtividade = (params, router) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -175,7 +175,7 @@ export const alterarSubAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -213,7 +213,7 @@ export const removerSubatividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
     
     return dispatch => {
 

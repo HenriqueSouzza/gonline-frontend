@@ -23,7 +23,7 @@ export const buscarAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -62,7 +62,7 @@ export const buscarAtividadeSelect = (params = []) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -103,7 +103,7 @@ export const salvarAtividade = (params, router) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -147,7 +147,7 @@ export const alterarAtividade = (params, router) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -190,7 +190,7 @@ export const removerAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
     
     return dispatch => {
 

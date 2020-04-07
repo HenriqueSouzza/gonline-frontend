@@ -27,7 +27,7 @@ export const buscarAtividadesAtivas = (params = []) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
         dispatch({type: type.LOAD, payload: true})
@@ -62,7 +62,7 @@ export const buscarAtividadesSelect = () => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
         dispatch({type: type.LOAD, payload: true})

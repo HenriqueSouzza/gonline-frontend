@@ -24,7 +24,7 @@ export const buscarGrupoAtividade = (params = []) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -64,7 +64,7 @@ export const salvarGrupoAtividade = (params, router) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -109,7 +109,7 @@ export const alterarGrupoAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
@@ -152,7 +152,7 @@ export const removerGrupoAtividade = (params) => {
 
     const token_temp = JSON.parse(data_token)
 
-    const headers = {'Authorization': token_temp.token }
+    const headers = {'Key': token_temp.token }
 
     return dispatch => {
 
