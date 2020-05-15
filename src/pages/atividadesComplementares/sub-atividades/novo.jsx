@@ -36,18 +36,18 @@ class Novo extends Component{
 
     constructor(props){
         super(props);
-        // if(props.subAtividades.list.length <= 0){
-        //     props.history.goBack()
-        // }
     }
 
     componentDidMount(){
         this.props.buscarDadosEditarSubAtividade()
+        if(this.props.subAtividades.grupoSelect.length <= 0){
+            this.props.buscarDadosSubAtividadeForm()
+        }
     }
 
     handleChange = (values) => {
-        if(values.grupo){
-            this.props.buscarDadosSubAtividadeForm(values)
+        if(values.tipo_ativ_compl){
+            this.props.buscarDadosSubAtividadeForm({grupo: values.tipo_ativ_compl})
         }
     }
 
